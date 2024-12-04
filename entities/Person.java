@@ -1,5 +1,4 @@
 package entities;
-
 import enums.Gender;
 
 public class Person {

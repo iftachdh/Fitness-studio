@@ -1,9 +1,11 @@
 package management;
 
+import entities.Person;
+
 public class Gym {
     private static Gym instance;
     private String name;
-    private Person secretary;
+    private Secretary secretary;
     private int secretarySalary;
     private int gymBalance;
 
@@ -22,10 +24,10 @@ public class Gym {
     }
 
     public void setSecretary(Person p, int salary){
-        this.secretary=p;
+        this.secretary=new Secretary(p,salary);
         this.secretarySalary=salary;
     }
-    public Person getSecretary(){
+    public Secretary getSecretary(){
         return this.secretary;
     }
 
