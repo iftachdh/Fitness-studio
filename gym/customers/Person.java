@@ -1,5 +1,4 @@
 package gym.customers;
-import enums.Gender;
 
 public class Person {
     private String name;

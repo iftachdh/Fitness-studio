@@ -2,10 +2,10 @@ package gym.management;
 
 import gym.customers.Client;
 import gym.customers.Person;
-import enums.Gender;
-import enums.SessionType;
+import gym.customers.Gender;
 import gym.Exception.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Secretary {
@@ -29,7 +29,7 @@ public class Secretary {
     public void unregisterClient(Client c) throws ClientNotRegisteredException {
         _gym.removeClient(c);
     }
-    public Instructor hireInstructor(Person p, int payment, List<SessionType> sessions){
+    public Instructor hireInstructor(Person p, int payment, ArrayList<SessionType> sessions){
         return new Instructor(p, payment, sessions);
     }
 }

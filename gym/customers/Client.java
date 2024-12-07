@@ -1,7 +1,5 @@
 package gym.customers;
 
-import enums.Gender;
-
 public class Client {
     public static int totalID=0;
     private int id;

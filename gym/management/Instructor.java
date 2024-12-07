@@ -1,7 +1,6 @@
 package gym.management;
 
 import gym.customers.Person;
-import enums.SessionType;
 
 import java.util.ArrayList;
 import java.util.List;

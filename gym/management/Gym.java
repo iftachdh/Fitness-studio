@@ -17,6 +17,7 @@ public class Gym {
     private Secretary secretary;
     private int secretarySalary;
     private int gymBalance;
+    private static List<Instructor> instructors;
 
     private static List<Client> clients;
 

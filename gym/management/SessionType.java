@@ -1,4 +1,4 @@
-package enums;
+package gym.management;
 
 public enum SessionType {
     Pilates,
