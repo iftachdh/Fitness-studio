@@ -1,6 +1,5 @@
-package entities;
+package gym.customers;
 
-import entities.Person;
 import enums.Gender;
 
 public class Client {

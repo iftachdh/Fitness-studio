@@ -1,12 +1,7 @@
-import entities.Client;
-import entities.Person;
-import enums.Gender;
 import gym.Exception.*;
 import gym.customers.*;
 import gym.management.*;
 import gym.management.Sessions.*;
-import management.Gym;
-import management.Secretary;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -127,7 +122,7 @@ public class Main {
 
         System.out.println("\n" + c1.getName() + " Notifications: " + c1.getNotifications());
 
-        System.out.println("\n---management.Gym information---");
+        System.out.println("\n---gym.Exception.management.Gym information---");
 
         System.out.print(gym);
     }

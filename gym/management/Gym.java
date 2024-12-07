@@ -1,8 +1,10 @@
-package management;
+package gym.management;
 
-import entities.Client;
-import entities.Person;
-import gym.Exception.*;
+import gym.customers.Client;
+import gym.customers.Person;
+import gym.Exception.ClientNotRegisteredException;
+import gym.Exception.DuplicateClientException;
+import gym.Exception.InvalidAgeException;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -29,17 +31,20 @@ public class Gym {
     }
     public void addClient(Client c) throws DuplicateClientException, InvalidAgeException {
         if(personIsClient(c.getPerson())){
-            throw new DuplicateClientException("Duplicate client");
+            throw new DuplicateClientException("Error: The client is already registered");
         }
         else if(!isAbove18(c.getPerson().getDateOfBirth())){
-            throw new InvalidAgeException("not 18");
+            throw new InvalidAgeException("Error: gym.customers.entities.Client must be at least 18 years old to register");
         }
         else{
             clients.add(c);
         }
     }
-    public void removeClient(Client c){
-        if(clients.contains(c))clients.remove(c);
+    public void removeClient(Client c) throws ClientNotRegisteredException {
+        if(personIsClient(c.getPerson()))clients.remove(c);
+        else{
+            throw new ClientNotRegisteredException("Error: Registration is required before attempting to unregister");
+        }
     }
 
     public void setName(String name){
@@ -56,9 +61,9 @@ public class Gym {
 
     @Override
     public String toString (){
-        System.out.println("management.Gym Name: "+name);
-        //System.out.println("management.Gym management.Secretary: "+);
-        System.out.println("management.Gym Balance: "+gymBalance);
+        System.out.println("gym.Exception.management.Gym Name: "+name);
+        //System.out.println("gym.Exception.management.Gym gym.Exception.management.Secretary: "+);
+        System.out.println("gym.Exception.management.Gym Balance: "+gymBalance);
     }
     private static boolean isAbove18(String birthDateString) {
         // how the date need to be

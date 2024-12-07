@@ -1,4 +1,4 @@
-package entities;
+package gym.customers;
 import enums.Gender;
 
 public class Person {
