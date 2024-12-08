@@ -1,19 +1,12 @@
 package gym.customers;
 
 public class Client {
-    public static int totalID=0;
     private int id;
     private Person person;
 
-    public Client(String name, int balance, Gender gender, String dateOfBirth){
-        this.person = new Person(name, balance, gender, dateOfBirth);
-        totalID++;
-        this.id = totalID;
-    }
-    public Client(Person p){
+    public Client(Person p, int id){
         this.person = p;
-        totalID++;
-        this.id = totalID;
+        this.id = id;
     }
 
     public int getId() {

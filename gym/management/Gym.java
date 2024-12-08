@@ -15,11 +15,10 @@ public class Gym {
     private static Gym instance;
     private String name;
     private Secretary secretary;
-    private int secretarySalary;
     private int gymBalance;
     private static List<Instructor> instructors;
-
     private static List<Client> clients;
+    public static int totalID=1110;
 
     private Gym() {
     }
@@ -30,7 +29,7 @@ public class Gym {
         }
         return instance;
     }
-    public void addClient(Client c) throws DuplicateClientException, InvalidAgeException {
+    protected void addClient(Client c) throws DuplicateClientException, InvalidAgeException {
         if(personIsClient(c.getPerson())){
             throw new DuplicateClientException("Error: The client is already registered");
         }
@@ -38,10 +37,12 @@ public class Gym {
             throw new InvalidAgeException("Error: gym.customers.entities.Client must be at least 18 years old to register");
         }
         else{
+            c.setId(totalID);
+            totalID++;
             clients.add(c);
         }
     }
-    public void removeClient(Client c) throws ClientNotRegisteredException {
+    protected void removeClient(Client c) throws ClientNotRegisteredException {
         if(personIsClient(c.getPerson()))clients.remove(c);
         else{
             throw new ClientNotRegisteredException("Error: Registration is required before attempting to unregister");
@@ -53,8 +54,8 @@ public class Gym {
     }
 
     public void setSecretary(Person p, int salary){
-        this.secretary=new Secretary(p,salary);
-        this.secretarySalary=salary;
+        this.secretary=new Secretary(p,salary,totalID);
+        totalID++;
     }
     public Secretary getSecretary(){
         return this.secretary;
@@ -84,5 +85,10 @@ public class Gym {
             if (client.getPerson() == p) return true;
         }
         return false;
+    }
+    protected void addInstructor(Instructor instructor){
+        instructors.add(instructor);
+        instructor.setId(totalID);
+        totalID++;
     }
 }

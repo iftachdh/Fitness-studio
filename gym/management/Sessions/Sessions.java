@@ -1,4 +1,7 @@
-package gym.management;
+package gym.management.Sessions;
+
+import gym.management.ForumType;
+import gym.management.Instructor;
 
 public class Sessions {
     SessionType _type;
