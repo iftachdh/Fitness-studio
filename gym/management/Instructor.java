@@ -10,13 +10,16 @@ public class Instructor {
     private List<SessionType> _sessions;
     private int id;
 
+
     protected Instructor(Person p, int payment, List<SessionType> sessions, int id){
         this._person = p;
         this._paymentPerHour = payment;
         this._sessions = sessions;
         this.id = id;
     }
-
+    public List<SessionType> get_sessions() {
+        return _sessions;
+    }
     public int getId() {
         return id;
     }

@@ -1,9 +1,15 @@
 package gym.management.Sessions;
 
+import gym.Exception.DuplicateClientException;
 import gym.customers.Client;
+import gym.customers.Gender;
 import gym.management.ForumType;
 import gym.management.Instructor;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public abstract class Session {
@@ -12,60 +18,70 @@ public abstract class Session {
     ForumType _forumType;
     Instructor _instructor;
     Client[] _registers;
+    int numOfRegisters=0;
     int _price;
-    private Session(SessionType type, String dateAndHour, ForumType forumType, Instructor instructor){
+
+
+    public Session(SessionType type, String dateAndHour, ForumType forumType, Instructor instructor){
         this._type = type;
         this._dateAndHour = dateAndHour;
         this._forumType = forumType;
         this._instructor = instructor;
     }
-    class Pilates extends Session{
-        private Pilates(SessionType type, String dateAndHour, ForumType forumType, Instructor instructor) {
-            super(type, dateAndHour, forumType, instructor);
-            this._registers = new Client[30];
-            this._price = 60;
-        }
-    }
-    class MachinePilates extends Session{
-        private MachinePilates(SessionType type, String dateAndHour, ForumType forumType, Instructor instructor) {
-            super(type, dateAndHour, forumType, instructor);
-            this._registers = new Client[10];
-            this._price = 80;
-        }
-    }
-    class ThaiBoxing extends Session{
-        private ThaiBoxing(SessionType type, String dateAndHour, ForumType forumType, Instructor instructor) {
-            super(type, dateAndHour, forumType, instructor);
-            this._registers = new Client[20];
-            this._price = 100;
-        }
-    }
-    class Ninja extends Session{
-        private Ninja(SessionType type, String dateAndHour, ForumType forumType, Instructor instructor) {
-            super(type, dateAndHour, forumType, instructor);
-            this._registers = new Client[5];
-            this._price = 150;
-        }
-    }
-    class SesionsFactory{
-        public Session CreateSession(SessionType type, String dateAndHour, ForumType forumType, Instructor instructor){
-            if(type.equals(SessionType.Pilates)){
-                return new Pilates(type, dateAndHour, forumType, instructor);
-            }
-            else if(type.equals(SessionType.MachinePilates)){
-                return new MachinePilates(type, dateAndHour, forumType, instructor);
-            }
-            else if(type.equals(SessionType.ThaiBoxing)){
-                return new ThaiBoxing(type, dateAndHour, forumType, instructor);
-            }
-            else if(type.equals(SessionType.Ninja)){
-                return new Ninja(type, dateAndHour, forumType, instructor);
-            }
-            else return null; //throw exception
-        }
+
+    public SessionType get_type() {
+        return _type;
     }
 
+    public void set_type(SessionType _type) {
+        this._type = _type;
+    }
 
+    public String get_dateAndHour() {
+        return _dateAndHour;
+    }
 
+    public void set_dateAndHour(String _dateAndHour) {
+        this._dateAndHour = _dateAndHour;
+    }
 
+    public ForumType get_forumType() {
+        return _forumType;
+    }
+
+    public void set_forumType(ForumType _forumType) {
+        this._forumType = _forumType;
+    }
+
+    public Instructor get_instructor() {
+        return _instructor;
+    }
+
+    public void set_instructor(Instructor _instructor) {
+        this._instructor = _instructor;
+    }
+
+    public Client[] get_registers() {
+        return _registers;
+    }
+
+    public void set_registers(Client[] _registers) {
+        this._registers = _registers;
+    }
+
+    public int getNumOfRegisters() {
+        return numOfRegisters;
+    }
+
+    public void setNumOfRegisters(int numOfRegisters) {
+        this.numOfRegisters = numOfRegisters;
+    }
+
+    public int get_price() {
+        return _price;
+    }
+
+    public void set_price(int _price) {
+        this._price = _price;
+    }
 }

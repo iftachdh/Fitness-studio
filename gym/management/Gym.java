@@ -5,6 +5,7 @@ import gym.customers.Person;
 import gym.Exception.ClientNotRegisteredException;
 import gym.Exception.DuplicateClientException;
 import gym.Exception.InvalidAgeException;
+import gym.management.Sessions.Session;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -16,8 +17,9 @@ public class Gym {
     private String name;
     private Secretary secretary;
     private int gymBalance;
-    private static List<Instructor> instructors;
+    private List<Instructor> instructors;
     private static List<Client> clients;
+    private  List<Session> sessions;
     public static int totalID=1110;
 
     private Gym() {
@@ -28,6 +30,9 @@ public class Gym {
             instance = new Gym();
         }
         return instance;
+    }
+    protected void newSession(Session s){
+        sessions.add(s);
     }
     protected void addClient(Client c) throws DuplicateClientException, InvalidAgeException {
         if(personIsClient(c.getPerson())){
@@ -66,6 +71,7 @@ public class Gym {
         System.out.println("gym.Exception.management.Gym Name: "+name);
         //System.out.println("gym.Exception.management.Gym gym.Exception.management.Secretary: "+);
         System.out.println("gym.Exception.management.Gym Balance: "+gymBalance);
+        return "d";
     }
     private static boolean isAbove18(String birthDateString) {
         // how the date need to be
