@@ -5,7 +5,6 @@ import gym.customers.Person;
 import gym.Exception.ClientNotRegisteredException;
 import gym.Exception.DuplicateClientException;
 import gym.Exception.InvalidAgeException;
-import gym.management.Sessions.Session;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -96,5 +95,17 @@ public class Gym {
         instructors.add(instructor);
         instructor.setId(totalID);
         totalID++;
+    }
+
+    protected boolean isClients(Client c) {
+        return clients.contains(c);
+    }
+
+    public void setGymBalance(int gymBalance) {
+        this.gymBalance = gymBalance;
+    }
+
+    public int getGymBalance() {
+        return gymBalance;
     }
 }
