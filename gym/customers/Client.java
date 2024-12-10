@@ -1,8 +1,14 @@
 package gym.customers;
 
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
-public class Client {
+interface Observ{
+    void update(String msg);
+}
+
+public class Client implements Observ {
     private int id;
     private Person person;
     private ArrayList<String> Notifications;
@@ -38,5 +44,9 @@ public class Client {
 
     public String getName(){
         return this.person.getName();
+    }
+    @Override
+    public void update(String msg) {
+        System.out.println(msg);
     }
 }

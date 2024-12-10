@@ -91,6 +91,11 @@ public class Gym {
         }
         return false;
     }
+    protected void notifyClients(String msg) {
+        for (Client client : clients) {
+            client.update(msg);
+        }
+    }
     protected void addInstructor(Instructor instructor){
         instructors.add(instructor);
         instructor.setId(totalID);
@@ -107,5 +112,9 @@ public class Gym {
 
     public int getGymBalance() {
         return gymBalance;
+    }
+
+    public List<Session> getSessions() {
+        return sessions;
     }
 }

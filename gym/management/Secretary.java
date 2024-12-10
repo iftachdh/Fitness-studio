@@ -2,15 +2,11 @@ package gym.management;
 
 import gym.customers.Client;
 import gym.customers.Person;
-import gym.customers.Gender;
 import gym.Exception.*;
 import gym.management.Sessions.SessionType;
 import gym.management.Sessions.SessionsFactory;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.Period;
-import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Secretary {
@@ -51,6 +47,18 @@ public class Secretary {
         if(s1.addRegister(c1)){
             _gym.setGymBalance(_gym.getGymBalance()+s1.get_price());
             c1.getPerson().setBalance(c1.getPerson().getBalance()-s1.get_price());
+        }
+    }
+    public void notify(Session session, String msg){
+        session.notifyClients(msg);
+    }
+    public void notify(String msg){
+        _gym.notifyClients(msg);
+    }
+    public void notify(String day, String msg){
+        List<Session> todaySassions = new ArrayList<>();
+        for(Session session : _gym.getSessions()){
+            if(session.get_dateAndHour().c)
         }
     }
 }

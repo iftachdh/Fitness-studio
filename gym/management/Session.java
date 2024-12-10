@@ -65,6 +65,11 @@ public abstract class Session {
         // check if the client is above 18
         return age > 65;
     }
+    protected void notifyClients(String msg) {
+        for (Client client : _registers) {
+            client.update(msg);
+        }
+    }
 
     public SessionType get_type() {
         return _type;
