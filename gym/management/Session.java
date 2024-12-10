@@ -66,4 +66,59 @@ public abstract class Session {
         return age > 65;
     }
 
+    public SessionType get_type() {
+        return _type;
+    }
+
+    public void set_type(SessionType _type) {
+        this._type = _type;
+    }
+
+    public String get_dateAndHour() {
+        return _dateAndHour;
+    }
+
+    public void set_dateAndHour(String _dateAndHour) {
+        this._dateAndHour = _dateAndHour;
+    }
+
+    public ForumType get_forumType() {
+        return _forumType;
+    }
+
+    public void set_forumType(ForumType _forumType) {
+        this._forumType = _forumType;
+    }
+
+    public Instructor get_instructor() {
+        return _instructor;
+    }
+
+    public void set_instructor(Instructor _instructor) {
+        this._instructor = _instructor;
+    }
+
+    public Client[] get_registers() {
+        return _registers;
+    }
+
+    public void set_registers(Client[] _registers) {
+        this._registers = _registers;
+    }
+
+    public int get_NumOfRegisters() {
+        return _NumOfRegisters;
+    }
+
+    public void set_NumOfRegisters(int _NumOfRegisters) {
+        this._NumOfRegisters = _NumOfRegisters;
+    }
+
+    public int get_price() {
+        return _price;
+    }
+
+    public void set_price(int _price) {
+        this._price = _price;
+    }
 }
