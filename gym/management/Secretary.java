@@ -58,7 +58,7 @@ public class Secretary {
     public void notify(String day, String msg){
         List<Session> todaySassions = new ArrayList<>();
         for(Session session : _gym.getSessions()){
-            if(session.get_dateAndHour().contains(day));
+            if(session.get_dateAndHour().contains(day))notify(session,msg);
         }
     }
 }
