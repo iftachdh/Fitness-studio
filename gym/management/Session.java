@@ -11,13 +11,13 @@ import java.time.Period;
 import java.time.format.DateTimeFormatter;
 
 public abstract class Session {
-    private SessionType _type;
-    private String _dateAndHour;
-    private ForumType _forumType;
-    private Instructor _instructor;
-    private Client[] _registers;
-    private int _NumOfRegisters=0;
-    private int _price;
+    protected SessionType _type;
+    protected String _dateAndHour;
+    protected ForumType _forumType;
+    protected Instructor _instructor;
+    protected Client[] _registers;
+    protected int _NumOfRegisters=0;
+    protected int _price;
     protected Session(SessionType type, String dateAndHour, ForumType forumType, Instructor instructor){
         this._type = type;
         this._dateAndHour = dateAndHour;
@@ -66,11 +66,4 @@ public abstract class Session {
         return age > 65;
     }
 
-    public int get_price() {
-        return _price;
-    }
-
-    public void set_price(int _price) {
-        this._price = _price;
-    }
 }
