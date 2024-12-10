@@ -47,6 +47,7 @@ public class Secretary {
         if(s1.addRegister(c1)){
             _gym.setGymBalance(_gym.getGymBalance()+s1.get_price());
             c1.getPerson().setBalance(c1.getPerson().getBalance()-s1.get_price());
+            _gym.getHistory().update("Registered client: "+c1.getName()+" to session: "+s1.get_type()+" on "+s1.get_date()+"T"+s1.get_hour()+" for price: "+s1.get_price());
         }
     }
     public void notify(Session session, String msg){

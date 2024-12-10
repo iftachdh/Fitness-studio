@@ -1,12 +1,10 @@
 package gym.customers;
 
+import gym.management.Observ;
+
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
-
-interface Observ{
-    void update(String msg);
-}
 
 public class Client implements Observ {
     private int id;

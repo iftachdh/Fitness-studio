@@ -13,6 +13,8 @@ import java.time.format.DateTimeFormatter;
 public abstract class Session {
     protected SessionType _type;
     protected String _dateAndHour;
+    protected String _date;
+    protected String _hour;
     protected ForumType _forumType;
     protected Instructor _instructor;
     protected Client[] _registers;
@@ -23,6 +25,8 @@ public abstract class Session {
         this._dateAndHour = dateAndHour;
         this._forumType = forumType;
         this._instructor = instructor;
+        this._date = dateAndHour.substring(0,10);
+        this._hour = dateAndHour.substring(10,15);
     }
     protected boolean addRegister (Client c) throws DuplicateClientException {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
@@ -125,5 +129,21 @@ public abstract class Session {
 
     public void set_price(int _price) {
         this._price = _price;
+    }
+
+    public String get_date() {
+        return _date;
+    }
+
+    public void set_date(String _date) {
+        this._date = _date;
+    }
+
+    public String get_hour() {
+        return _hour;
+    }
+
+    public void set_hour(String _hour) {
+        this._hour = _hour;
     }
 }

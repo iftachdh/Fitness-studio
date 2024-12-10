@@ -5,6 +5,7 @@ import gym.customers.Person;
 import gym.Exception.ClientNotRegisteredException;
 import gym.Exception.DuplicateClientException;
 import gym.Exception.InvalidAgeException;
+import gym.management.Sessions.Vlog;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -20,6 +21,7 @@ public class Gym {
     private static List<Client> clients;
     private  List<Session> sessions;
     public static int totalID=1110;
+    private Vlog history;
 
     private Gym() {
     }
@@ -32,6 +34,7 @@ public class Gym {
     }
     protected void newSession(Session s){
         sessions.add(s);
+        history.update("Created new session: "+s.get_type()+" on "+s.get_date()+"T"+s.get_hour()+" with instructor: "+s.get_instructor().get_person().getName());
     }
     protected void addClient(Client c) throws DuplicateClientException, InvalidAgeException {
         if(personIsClient(c.getPerson())){
@@ -44,10 +47,14 @@ public class Gym {
             c.setId(totalID);
             totalID++;
             clients.add(c);
+            history.update("Registered new client: " + c.getName());
         }
     }
     protected void removeClient(Client c) throws ClientNotRegisteredException {
-        if(personIsClient(c.getPerson()))clients.remove(c);
+        if(personIsClient(c.getPerson())){
+            clients.remove(c);
+            history.update("Unregistered client: " + c.getName());
+        }
         else{
             throw new ClientNotRegisteredException("Error: Registration is required before attempting to unregister");
         }
@@ -60,6 +67,7 @@ public class Gym {
     public void setSecretary(Person p, int salary){
         this.secretary=new Secretary(p,salary,totalID);
         totalID++;
+        history.update("A new secretary has started working at the gym: " + p.getName());
     }
     public Secretary getSecretary(){
         return this.secretary;
@@ -100,6 +108,7 @@ public class Gym {
         instructors.add(instructor);
         instructor.setId(totalID);
         totalID++;
+        history.update("Hired new instructor: "+instructor.get_person().getName()+" with salary per hour: "+instructor.get_paymentPerHour());
     }
 
     protected boolean isClients(Client c) {
@@ -116,5 +125,13 @@ public class Gym {
 
     public List<Session> getSessions() {
         return sessions;
+    }
+
+    public Vlog getHistory() {
+        return history;
+    }
+
+    public void setHistory(Vlog history) {
+        this.history = history;
     }
 }

@@ -27,4 +27,24 @@ public class Instructor {
     public void setId(int id) {
         this.id = id;
     }
+
+    public Person get_person() {
+        return _person;
+    }
+
+    public void set_person(Person _person) {
+        this._person = _person;
+    }
+
+    public int get_paymentPerHour() {
+        return _paymentPerHour;
+    }
+
+    public void set_paymentPerHour(int _paymentPerHour) {
+        this._paymentPerHour = _paymentPerHour;
+    }
+
+    public void set_sessions(List<SessionType> _sessions) {
+        this._sessions = _sessions;
+    }
 }
