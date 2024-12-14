@@ -27,7 +27,7 @@ public abstract class Session {
     }
     protected void notifyClients(String msg) {
         for (Client client : _registers) {
-            client.update(msg);
+            if(client!=null) client.update(msg);
         }
     }
     protected void addClient(Client client){

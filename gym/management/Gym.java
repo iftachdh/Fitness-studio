@@ -81,10 +81,15 @@ public class Gym {
 
     @Override
     public String toString (){
-        System.out.println("gym.Exception.management.Gym Name: "+name);
-        //System.out.println("gym.Exception.management.Gym gym.Exception.management.Secretary: "+);
-        System.out.println("gym.Exception.management.Gym Balance: "+gymBalance);
-        return "d";
+        String ans = ("gym.Exception.management.Gym Name: "+name+"\n"+
+                     "gym.management.Gym gym.management.Secretary: ID: "+secretary.get_id()+" | Name: "+secretary.get_person().getName()+" | gym.customers.Gender: "+secretary.get_person().getGender()+" | Birthday: "+secretary.get_person().getDateOfBirth()+" | Age: "+secretary.get_person().getAge()+" | Balance: "+secretary.get_person().getBalance()+" | Role: gym.management.Secretary | Salary per Month: "+secretary.get_salary()+"\n"+
+                      "gym.management.Gym Balance: "+gymBalance+"\n"+
+                      "\n"+
+                      "Clients Data:"+"\n");
+        for (Client client : clients){
+            ans.add"ID: "+client.getId()+" | Name: "+client.getName()+" | gym.customers.Gender: "+client.getPerson().getGender()+" | Birthday: "+client.getPerson().getDateOfBirth()+" | Age: "+client.getPerson().getAge()+" | Balance: "+client.getPerson().getBalance()+"\n"+
+        }
+                +"\n"+);
     }
     private static boolean isAbove18(LocalDate birthDate) {
         // the LocalDate of this moment

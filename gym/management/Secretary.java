@@ -76,34 +76,7 @@ public class Secretary {
     }
     public void printActions(){
         if(_gym.getSecretary()!=this) throw new NullPointerException("Error: Former secretaries are not permitted to perform actions");
-        System.out.println("---Actions history---");
         _gym.getHistory().Print();
-        System.out.println();
-        System.out.println();//add line 53
-        System.out.println();
-        System.out.println("---gym.management.Gym information---");
-        System.out.println("gym.management.Gym Name: "+_gym.getName());
-        System.out.println("gym.management.Gym gym.management.Secretary: ID: "+_id+" | Name: "+_person.getName()+" | gym.customers.Gender: "+_person.getGender()+" | Birthday: "+_person.getDateOfBirth()+" | Age: "+_person.getAge()+" | Balance: "+_person.getBalance()+" | Role: gym.management.Secretary | Salary per Month: "+_salary);
-        System.out.println("gym.management.Gym Balance: "+_gym.getGymBalance());
-        System.out.println();
-        System.out.println("Clients Data:");
-        List<Client> clients = _gym.getClients();
-        for (Client client : clients){
-            System.out.println("ID: "+client.getId()+" | Name: "+client.getName()+" | gym.customers.Gender: "+client.getPerson().getGender()+" | Birthday: "+client.getPerson().getDateOfBirth()+" | Age: "+client.getPerson().getAge()+" | Balance: "+client.getPerson().getBalance());
-        }
-        System.out.println();
-        System.out.println("Employees Data:");
-        List<Instructor> instructors = _gym.getInstructors();
-        for (Instructor instructor : instructors){
-            System.out.println("ID: "+instructor.getId()+" | Name: "+instructor.get_person().getName()+" | gym.customers.Gender: "+instructor.get_person().getGender()+" | Birthday: "+instructor.get_person().getDateOfBirth()+" | Age: "+instructor.get_person().getAge()+" | Balance: "+instructor.get_person().getBalance()+" | Role: Instructor | Salary per Hour: "+instructor.get_paymentPerHour()+" | Certified Classes: "+instructor.get_sessions());
-        }
-        System.out.println("ID: "+_id+" | Name: "+_person.getName()+" | gym.customers.Gender: "+_person.getGender()+" | Birthday: "+_person.getDateOfBirth()+" | Age: "+_person.getAge()+" | Balance: "+_person.getBalance()+" | Role: gym.management.Secretary | Salary per Month: "+_salary);
-        System.out.println();
-        System.out.println("Sessions Data:");
-        List<Session> sessions = _gym.getSessions();
-        for (Session session : sessions){
-            System.out.println("Session Type: "+session.get_type()+" | Date: "+session.get_dateAndHour()+" | Forum: "+session.get_forumType()+" | Instructor: "+session.get_instructor().get_person().getName()+" | Participants: "+session.get_NumOfRegisters()+"/"+session.get_registers().length);
-        }
     }
     public void notify(Session session, String msg){
         if(_gym.getSecretary()!=this) throw new NullPointerException("Error: Former secretaries are not permitted to perform actions");
@@ -117,11 +90,36 @@ public class Secretary {
     }
     public void notify(String day, String msg){
         if(_gym.getSecretary()!=this) throw new NullPointerException("Error: Former secretaries are not permitted to perform actions");
-        LocalDate theDay = LocalDate.parse(day);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate theDay = LocalDate.parse(day, formatter);
         List<Session> sessions = _gym.getSessions();
         for(Session session : sessions){
             if(session.get_dateAndHour().toLocalDate().equals(theDay))notify(session,msg);
         }
         _gym.notifyHistory("A message was sent to everyone registered for a session on "+theDay+" : "+msg);
+    }
+
+    public Person get_person() {
+        return _person;
+    }
+
+    public void set_person(Person _person) {
+        this._person = _person;
+    }
+
+    public int get_salary() {
+        return _salary;
+    }
+
+    public void set_salary(int _salary) {
+        this._salary = _salary;
+    }
+
+    public int get_id() {
+        return _id;
+    }
+
+    public void set_id(int _id) {
+        this._id = _id;
     }
 }
