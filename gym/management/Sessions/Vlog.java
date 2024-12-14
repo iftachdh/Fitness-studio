@@ -6,14 +6,16 @@ import java.util.ArrayList;
 
 public class Vlog implements Observ {
     ArrayList<String> history;
+    public Vlog(){
+        this.history = new ArrayList<>();
+    }
     @Override
     public void update(String msg) {
         history.add(msg);
     }
     public void Print(){
-        System.out.println("---Actions history---");
         for (String s : history){
-            System.out.println(s+"\n");
+            System.out.println(s);
         }
     }
 }

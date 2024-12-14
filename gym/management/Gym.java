@@ -6,10 +6,9 @@ import gym.Exception.ClientNotRegisteredException;
 import gym.Exception.DuplicateClientException;
 import gym.Exception.InvalidAgeException;
 import gym.management.Sessions.Vlog;
-
 import java.time.LocalDate;
 import java.time.Period;
-import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Gym {
@@ -18,12 +17,19 @@ public class Gym {
     private Secretary secretary;
     private int gymBalance;
     private List<Instructor> instructors;
-    private static List<Client> clients;
-    private  List<Session> sessions;
+    private List<Client> clients;
+    private List<Session> sessions;
+    private List<Session> payedSessions;
     public static int totalID=1110;
     private Vlog history;
 
     private Gym() {
+        this.instructors = new ArrayList<>();
+        this.clients = new ArrayList<>();
+        this.sessions = new ArrayList<>();
+        this.payedSessions = new ArrayList<>();
+        this.history = new Vlog();
+        this.gymBalance = 0;
     }
 
     public static Gym getInstance() {
@@ -34,7 +40,7 @@ public class Gym {
     }
     protected void newSession(Session s){
         sessions.add(s);
-        history.update("Created new session: "+s.get_type()+" on "+s.get_date()+"T"+s.get_hour()+" with instructor: "+s.get_instructor().get_person().getName());
+        this.notifyHistory("Created new session: "+s.get_type()+" on "+s.get_dateAndHour()+" with instructor: "+s.get_instructor().get_person().getName());
     }
     protected void addClient(Client c) throws DuplicateClientException, InvalidAgeException {
         if(personIsClient(c.getPerson())){
@@ -80,20 +86,16 @@ public class Gym {
         System.out.println("gym.Exception.management.Gym Balance: "+gymBalance);
         return "d";
     }
-    private static boolean isAbove18(String birthDateString) {
-        // how the date need to be
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        // change it to LocalDate
-        LocalDate birthDate = LocalDate.parse(birthDateString, formatter);
+    private static boolean isAbove18(LocalDate birthDate) {
         // the LocalDate of this moment
         LocalDate currentDate = LocalDate.now();
         // calculate the age
         Period period = Period.between(birthDate, currentDate);
         int age = period.getYears();
         // check if the client is above 18
-        return age > 18;
+        return age >= 18;
     }
-    private static boolean personIsClient(Person p){
+    private boolean personIsClient(Person p){
         for (Client client : clients) {
             if (client.getPerson() == p) return true;
         }
@@ -103,6 +105,9 @@ public class Gym {
         for (Client client : clients) {
             client.update(msg);
         }
+    }
+    protected void notifyHistory(String msg){
+        history.update(msg);
     }
     protected void addInstructor(Instructor instructor){
         instructors.add(instructor);
@@ -133,5 +138,53 @@ public class Gym {
 
     public void setHistory(Vlog history) {
         this.history = history;
+    }
+
+    public static void setInstance(Gym instance) {
+        Gym.instance = instance;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setSecretary(Secretary secretary) {
+        this.secretary = secretary;
+    }
+
+    public List<Instructor> getInstructors() {
+        return instructors;
+    }
+
+    public void setInstructors(List<Instructor> instructors) {
+        this.instructors = instructors;
+    }
+
+    public List<Client> getClients() {
+        return clients;
+    }
+
+    public void setClients(List<Client> clients) {
+        this.clients = clients;
+    }
+
+    public void setSessions(List<Session> sessions) {
+        this.sessions = sessions;
+    }
+
+    public List<Session> getPayedSessions() {
+        return payedSessions;
+    }
+
+    public void setPayedSessions(List<Session> payedSessions) {
+        this.payedSessions = payedSessions;
+    }
+
+    public static int getTotalID() {
+        return totalID;
+    }
+
+    public static void setTotalID(int totalID) {
+        Gym.totalID = totalID;
     }
 }

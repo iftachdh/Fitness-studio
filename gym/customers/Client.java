@@ -14,6 +14,7 @@ public class Client implements Observ {
     public Client(Person p, int id){
         this.person = p;
         this.id = id;
+        this.Notifications = new ArrayList<>();
     }
 
     public int getId() {
@@ -45,6 +46,6 @@ public class Client implements Observ {
     }
     @Override
     public void update(String msg) {
-        System.out.println(msg);
+        this.Notifications.add(msg);
     }
 }

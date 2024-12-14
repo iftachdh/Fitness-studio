@@ -1,16 +1,21 @@
 package gym.customers;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+
 public class Person {
     private String name;
     private int balance;
     private Gender gender;
-    private String dateOfBirth;
+    private LocalDate dateOfBirth;
 
     public Person(String name, int balance, Gender gender, String dateOfBirth) {
         this.name = name;
         this.balance = balance;
         this.gender = gender;
-        this.dateOfBirth = dateOfBirth;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        this.dateOfBirth = LocalDate.parse(dateOfBirth, formatter);
     }
 
     public String getName() {
@@ -37,11 +42,16 @@ public class Person {
         this.gender = gender;
     }
 
-    public String getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+    public int getAge(){
+        LocalDate now = LocalDate.now();
+        Period period = Period.between(dateOfBirth, now);
+        return period.getYears();
     }
 }
