@@ -87,9 +87,22 @@ public class Gym {
                       "\n"+
                       "Clients Data:"+"\n");
         for (Client client : clients){
-            ans.add"ID: "+client.getId()+" | Name: "+client.getName()+" | gym.customers.Gender: "+client.getPerson().getGender()+" | Birthday: "+client.getPerson().getDateOfBirth()+" | Age: "+client.getPerson().getAge()+" | Balance: "+client.getPerson().getBalance()+"\n"+
+            String temp=("ID: "+client.getId()+" | Name: "+client.getName()+" | gym.customers.Gender: "+client.getPerson().getGender()+" | Birthday: "+client.getPerson().getDateOfBirth()+" | Age: "+client.getPerson().getAge()+" | Balance: "+client.getPerson().getBalance()+"\n");
+            ans=ans+temp;
         }
-                +"\n"+);
+        ans=ans+"\n"+"Employees Data:"+"\n";
+        for (Instructor instructor : instructors){
+            String temp=("ID: "+instructor.getId()+" | Name: "+instructor.get_person().getName()+" | gym.customers.Gender: "+instructor.get_person().getGender()+" | Birthday: "+instructor.get_person().getDateOfBirth()+" | Age: "+instructor.get_person().getAge()+" | Balance: "+instructor.get_person().getBalance()+" | Role: Instructor | Salary per Hour: "+instructor.get_paymentPerHour()+" | Certified Classes: "+instructor.get_sessions()+"\n");
+            ans=ans+temp;
+        }
+        ans=ans+("ID: "+secretary.get_id()+" | Name: "+secretary.get_person().getName()+" | gym.customers.Gender: "+secretary.get_person().getGender()+" | Birthday: "+secretary.get_person().getDateOfBirth()+" | Age: "+secretary.get_person().getAge()+" | Balance: "+secretary.get_person().getBalance()+" | Role: gym.management.Secretary | Salary per Month: "+secretary.get_salary()+"\n");
+        ans=ans+"\n";
+        ans=ans+("Sessions Data:"+"\n");
+        for (Session session : sessions){
+            String temp = ("Session Type: "+session.get_type()+" | Date: "+session.get_dateAndHour()+" | Forum: "+session.get_forumType()+" | Instructor: "+session.get_instructor().get_person().getName()+" | Participants: "+session.get_NumOfRegisters()+"/"+session.get_registers().length+"\n");
+            ans=ans+temp;
+        }
+        return ans;
     }
     private static boolean isAbove18(LocalDate birthDate) {
         // the LocalDate of this moment
