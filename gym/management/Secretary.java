@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Secretary {
@@ -62,14 +63,16 @@ public class Secretary {
         List<Session> sessions = _gym.getSessions();
         List<Session> payedSessions = _gym.getPayedSessions();
         LocalDateTime currentTime = LocalDateTime.now();
-        for(Session session : sessions){
+        Iterator<Session> iterator = sessions.iterator();
+        while (iterator.hasNext()) {
+            Session session = iterator.next();
             if(session.get_dateAndHour().isBefore(currentTime)){
                 Person instructor = session.get_instructor().get_person();
                 int payment = session.get_price();
                 instructor.setBalance(instructor.getBalance()+payment);
                 _gym.setGymBalance(_gym.getGymBalance()-payment);
                 payedSessions.add(session);
-                sessions.remove(session);
+                iterator.remove();
             }
         }
         _gym.notifyHistory("Salaries have been paid to all employees");
