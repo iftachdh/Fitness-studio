@@ -19,15 +19,12 @@ public class Gym {
     private List<Instructor> instructors;
     private List<Client> clients;
     private List<Session> sessions;
-    private List<Session> payedSessions;
-    public static int totalID=1110;
     private Vlog history;
 
     private Gym() {
         this.instructors = new ArrayList<>();
         this.clients = new ArrayList<>();
         this.sessions = new ArrayList<>();
-        this.payedSessions = new ArrayList<>();
         this.history = new Vlog();
         this.gymBalance = 0;
     }
@@ -50,8 +47,6 @@ public class Gym {
             throw new InvalidAgeException("Error: gym.customers.entities.Client must be at least 18 years old to register");
         }
         else{
-            c.setId(totalID);
-            totalID++;
             clients.add(c);
             history.update("Registered new client: " + c.getName());
         }
@@ -71,8 +66,8 @@ public class Gym {
     }
 
     public void setSecretary(Person p, int salary){
-        this.secretary=new Secretary(p,salary,totalID);
-        totalID++;
+
+        this.secretary=new Secretary(p,salary);
         history.update("A new secretary has started working at the gym: " + p.getName());
     }
     public Secretary getSecretary(){
@@ -82,25 +77,24 @@ public class Gym {
     @Override
     public String toString (){
         String ans = ("gym.Exception.management.Gym Name: "+name+"\n"+
-                     "gym.management.Gym gym.management.Secretary: ID: "+secretary.get_id()+" | Name: "+secretary.get_person().getName()+" | gym.customers.Gender: "+secretary.get_person().getGender()+" | Birthday: "+secretary.get_person().getDateOfBirth()+" | Age: "+secretary.get_person().getAge()+" | Balance: "+secretary.get_person().getBalance()+" | Role: gym.management.Secretary | Salary per Month: "+secretary.get_salary()+"\n"+
+                     "gym.management.Gym gym.management.Secretary: "+secretary+"\n"+
                       "gym.management.Gym Balance: "+gymBalance+"\n"+
                       "\n"+
                       "Clients Data:"+"\n");
         for (Client client : clients){
-            String temp=("ID: "+client.getId()+" | Name: "+client.getName()+" | gym.customers.Gender: "+client.getPerson().getGender()+" | Birthday: "+client.getPerson().getDateOfBirth()+" | Age: "+client.getPerson().getAge()+" | Balance: "+client.getPerson().getBalance()+"\n");
-            ans=ans+temp;
+            ans=(ans+client+"\n");
         }
+
         ans=ans+"\n"+"Employees Data:"+"\n";
         for (Instructor instructor : instructors){
-            String temp=("ID: "+instructor.getId()+" | Name: "+instructor.get_person().getName()+" | gym.customers.Gender: "+instructor.get_person().getGender()+" | Birthday: "+instructor.get_person().getDateOfBirth()+" | Age: "+instructor.get_person().getAge()+" | Balance: "+instructor.get_person().getBalance()+" | Role: Instructor | Salary per Hour: "+instructor.get_paymentPerHour()+" | Certified Classes: "+instructor.get_sessions()+"\n");
-            ans=ans+temp;
+            ans=(ans+instructor+"\n");
         }
-        ans=ans+("ID: "+secretary.get_id()+" | Name: "+secretary.get_person().getName()+" | gym.customers.Gender: "+secretary.get_person().getGender()+" | Birthday: "+secretary.get_person().getDateOfBirth()+" | Age: "+secretary.get_person().getAge()+" | Balance: "+secretary.get_person().getBalance()+" | Role: gym.management.Secretary | Salary per Month: "+secretary.get_salary()+"\n");
+        ans=ans+(secretary+"\n");
         ans=ans+"\n";
+
         ans=ans+("Sessions Data:"+"\n");
         for (Session session : sessions){
-            String temp = ("Session Type: "+session.get_type()+" | Date: "+session.get_dateAndHour()+" | Forum: "+session.get_forumType()+" | Instructor: "+session.get_instructor().get_person().getName()+" | Participants: "+session.get_NumOfRegisters()+"/"+session.get_registers().length+"\n");
-            ans=ans+temp;
+            ans=(ans+session+"\n");
         }
         return ans;
     }
@@ -129,8 +123,6 @@ public class Gym {
     }
     protected void addInstructor(Instructor instructor){
         instructors.add(instructor);
-        instructor.setId(totalID);
-        totalID++;
         history.update("Hired new instructor: "+instructor.get_person().getName()+" with salary per hour: "+instructor.get_paymentPerHour());
     }
 
@@ -188,21 +180,5 @@ public class Gym {
 
     public void setSessions(List<Session> sessions) {
         this.sessions = sessions;
-    }
-
-    public List<Session> getPayedSessions() {
-        return payedSessions;
-    }
-
-    public void setPayedSessions(List<Session> payedSessions) {
-        this.payedSessions = payedSessions;
-    }
-
-    public static int getTotalID() {
-        return totalID;
-    }
-
-    public static void setTotalID(int totalID) {
-        Gym.totalID = totalID;
     }
 }

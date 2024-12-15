@@ -16,17 +16,21 @@ import java.util.List;
 public class Secretary {
     private Person _person;
     private int _salary;
-    private int _id;
     private static final Gym _gym = Gym.getInstance();
 
-    public Secretary(Person p, int salary, int id){
+    public Secretary(Person p, int salary){
         this._person = p;
         this._salary = salary;
-        this._id = id;
     }
+
+    @Override
+    public String toString() {
+        return (_person+" | Role: gym.management.Secretary | Salary per Month: "+_salary);
+    }
+
     public Client registerClient(Person p) throws InvalidAgeException, DuplicateClientException {
         if(_gym.getSecretary()!=this) throw new NullPointerException("Error: Former secretaries are not permitted to perform actions");
-        Client c = new Client(p,-1);
+        Client c = new Client(p);
         _gym.addClient(c);
         return c;
     }
@@ -36,7 +40,7 @@ public class Secretary {
     }
     public Instructor hireInstructor(Person p, int payment, List<SessionType> sessions){
         if(_gym.getSecretary()!=this) throw new NullPointerException("Error: Former secretaries are not permitted to perform actions");
-        Instructor instructor = new Instructor(p, payment, sessions, -1);
+        Instructor instructor = new Instructor(p, payment, sessions);
         _gym.addInstructor(instructor);
         return instructor;
     }
@@ -61,18 +65,17 @@ public class Secretary {
     public void paySalaries(){
         if(_gym.getSecretary()!=this) throw new NullPointerException("Error: Former secretaries are not permitted to perform actions");
         List<Session> sessions = _gym.getSessions();
-        List<Session> payedSessions = _gym.getPayedSessions();
         LocalDateTime currentTime = LocalDateTime.now();
         Iterator<Session> iterator = sessions.iterator();
         while (iterator.hasNext()) {
             Session session = iterator.next();
             if(session.get_dateAndHour().isBefore(currentTime)){
-                Person instructor = session.get_instructor().get_person();
-                int payment = session.get_price();
-                instructor.setBalance(instructor.getBalance()+payment);
-                _gym.setGymBalance(_gym.getGymBalance()-payment);
-                payedSessions.add(session);
-                iterator.remove();
+                if(!session.is_payed()){
+                    Person instructor = session.get_instructor().get_person();
+                    int payment = session.get_price();
+                    instructor.setBalance(instructor.getBalance()+payment);
+                    _gym.setGymBalance(_gym.getGymBalance()-payment);
+                }
             }
         }
         _gym.notifyHistory("Salaries have been paid to all employees");
@@ -97,9 +100,13 @@ public class Secretary {
         LocalDate theDay = LocalDate.parse(day, formatter);
         List<Session> sessions = _gym.getSessions();
         for(Session session : sessions){
-            if(session.get_dateAndHour().toLocalDate().equals(theDay))notify(session,msg);
+            if(session.get_dateAndHour().toLocalDate().equals(theDay))notifyByDay(session,msg);
         }
         _gym.notifyHistory("A message was sent to everyone registered for a session on "+theDay+" : "+msg);
+    }
+    public void notifyByDay(Session session, String msg){
+        if(_gym.getSecretary()!=this) throw new NullPointerException("Error: Former secretaries are not permitted to perform actions");
+        session.notifyClients(msg);
     }
 
     public Person get_person() {
@@ -118,11 +125,4 @@ public class Secretary {
         this._salary = _salary;
     }
 
-    public int get_id() {
-        return _id;
-    }
-
-    public void set_id(int _id) {
-        this._id = _id;
-    }
 }

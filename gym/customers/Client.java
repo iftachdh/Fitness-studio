@@ -7,22 +7,17 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class Client implements Observ {
-    private int id;
     private Person person;
     private ArrayList<String> Notifications;
 
-    public Client(Person p, int id){
+    public Client(Person p){
         this.person = p;
-        this.id = id;
         this.Notifications = new ArrayList<>();
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    @Override
+    public String toString() {
+        return (person.toString());
     }
 
     public Person getPerson() {

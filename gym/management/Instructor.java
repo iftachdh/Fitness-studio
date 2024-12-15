@@ -8,24 +8,21 @@ public class Instructor {
     private Person _person;
     private int _paymentPerHour;
     private List<SessionType> _sessions;
-    private int id;
 
 
-    protected Instructor(Person p, int payment, List<SessionType> sessions, int id){
+    protected Instructor(Person p, int payment, List<SessionType> sessions){
         this._person = p;
         this._paymentPerHour = payment;
         this._sessions = sessions;
-        this.id = id;
-    }
-    public List<SessionType> get_sessions() {
-        return _sessions;
-    }
-    public int getId() {
-        return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    @Override
+    public String toString() {
+        return (_person+" | Role: Instructor | Salary per Hour: "+_paymentPerHour+" | Certified Classes: "+_sessions);
+    }
+
+    public List<SessionType> get_sessions() {
+        return _sessions;
     }
 
     public Person get_person() {

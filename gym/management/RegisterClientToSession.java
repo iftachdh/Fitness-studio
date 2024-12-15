@@ -22,23 +22,32 @@ public class RegisterClientToSession {
         if(!_gym.isClients(_client)){
             throw new ClientNotRegisteredException("Error: The client is not registered with the gym and cannot enroll in lessons");
         }
-        LocalDateTime currentTime = LocalDateTime.now();
-        if (_session.get_dateAndHour().isBefore(currentTime))_gym.getHistory().update("Failed registration: Session is not in the future");
-        if(!this.chekesLeagalForumType()) return false;
-        if (_session.get_NumOfRegisters() >= _session.get_registers().length ){
-            _gym.getHistory().update("Failed registration: No available spots for session");
-            return false;
-        }
-        if (_client.getPerson().getBalance() < _session.get_price()){
-            _gym.getHistory().update("Failed registration: gym.customers.Client doesn't have enough balance");
-            return false;
-        }
         for (int i = 0; i < _session.get_NumOfRegisters() ; i++) {
             if(_session.get_registers()[i]==_client){
                 throw new DuplicateClientException("Error: The client is already registered for this lesson");
             }
         }
-        return true;
+        LocalDateTime currentTime = LocalDateTime.now();
+        boolean a=true;
+        if (_session.get_dateAndHour().isBefore(currentTime)){
+            _gym.getHistory().update("Failed registration: Session is not in the future");
+            a=false;
+        }
+        boolean b=true;
+        if(!this.chekesLeagalForumType()){
+            b=false;
+        }
+        boolean c=true;
+        if (_session.get_NumOfRegisters() >= _session.get_registers().length ){
+            _gym.getHistory().update("Failed registration: No available spots for session");
+            c=false;
+        }
+        boolean d=true;
+        if (_client.getPerson().getBalance() < _session.get_price()){
+            _gym.getHistory().update("Failed registration: gym.customers.Client doesn't have enough balance");
+            d=false;
+        }
+        return (a&&b&&c&&d);
     }
 
     private boolean chekesLeagalForumType(){
