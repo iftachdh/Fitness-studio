@@ -68,7 +68,7 @@ public class Secretary {
         while (iterator.hasNext()) {
             Session session = iterator.next();
             if(session.get_dateAndHour().isBefore(currentTime)){
-                if(!session.is_payed()){
+                if(!session.is_payed()&&session._NumOfRegisters>0){
                     Instructor instructor = session.get_instructor();
                     int payment = session.get_price();
                     instructor.setBalance(instructor.getBalance()+payment);

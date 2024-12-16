@@ -8,7 +8,6 @@ import java.time.format.DateTimeFormatter;
 
 public class Person {
     protected String name;
-    protected int balance;
     protected Gender gender;
     protected LocalDate dateOfBirth;
     protected String dateOfBirthString;
@@ -18,18 +17,17 @@ public class Person {
 
     public Person(String name, int balance, Gender gender, String dateOfBirth) {
         this.name = name;
-        this.balance = balance;
         this.gender = gender;
         this.dateOfBirthString=dateOfBirth;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         this.dateOfBirth = LocalDate.parse(dateOfBirth, formatter);
         this.id=totalID++;
-        bank.
+        bank.changeBalance(id,balance);
     }
 
     @Override
     public String toString() {
-        return ("ID: "+id+" | Name: "+name+" | gym.customers.Gender: "+gender+" | Birthday: "+dateOfBirthString+" | Age: "+getAge()+" | Balance: "+balance);
+        return ("ID: "+id+" | Name: "+name+" | gym.customers.Gender: "+gender+" | Birthday: "+dateOfBirthString+" | Age: "+getAge()+" | Balance: "+bank.GetBalance(id));
     }
 
     public String getName() {
@@ -41,11 +39,11 @@ public class Person {
     }
 
     public int getBalance() {
-        return balance;
+        return bank.GetBalance(id);
     }
 
     public void setBalance(int balance) {
-        this.balance = balance;
+        bank.changeBalance(id, balance);
     }
 
     public Gender getGender() {

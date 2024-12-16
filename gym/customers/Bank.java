@@ -16,7 +16,7 @@ public class Bank {
         return instance;
     }
 
-    public static int GetBalance(int accountId) {
+    public int GetBalance(int accountId) {
         if (accounts.containsKey(accountId)) {
             return accounts.get(accountId);
         } else {
@@ -24,19 +24,11 @@ public class Bank {
         }
     }
 
-    public static void createAccount(int accountId, int initialBalance) {
-        if (!accounts.containsKey(accountId)) {
-            accounts.put(accountId, initialBalance);
-        }
-    }
-
-    public static void changeBalance(int accountId, int amount) {
+    public void changeBalance(int accountId, int amount) {
         if (accounts.containsKey(accountId)) {
-            int newBalance = accounts.get(accountId) + amount;
-            accounts.put(accountId, newBalance);
-            return "Balance for account " + accountId + " has been updated to: " + newBalance + " USD.";
+            accounts.put(accountId, amount);
         } else {
-            return "Account does not exist.";
+            accounts.put(accountId, amount);
         }
     }
 }
