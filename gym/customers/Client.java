@@ -3,29 +3,17 @@ package gym.customers;
 import gym.management.Observ;
 
 import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
 
-public class Client implements Observ {
-    private Person person;
+public class Client extends Person implements Observ {
     private ArrayList<String> Notifications;
 
     public Client(Person p){
-        this.person = p;
+        super(p.getName(), p.getBalance(),p.getGender(),p.getDateOfBirthString());
         this.Notifications = new ArrayList<>();
     }
-
     @Override
     public String toString() {
-        return (person.toString());
-    }
-
-    public Person getPerson() {
-        return person;
-    }
-
-    public void setPerson(Person _p) {
-        this.person = _p;
+        return ("ID: "+id+" | Name: "+name+" | gym.customers.Gender: "+gender+" | Birthday: "+dateOfBirthString+" | Age: "+getAge()+" | Balance: "+balance);
     }
 
     public ArrayList<String> getNotifications() {
@@ -36,9 +24,6 @@ public class Client implements Observ {
         Notifications = notifications;
     }
 
-    public String getName(){
-        return this.person.getName();
-    }
     @Override
     public void update(String msg) {
         this.Notifications.add(msg);

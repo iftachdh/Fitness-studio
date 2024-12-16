@@ -37,13 +37,13 @@ public class Gym {
     }
     protected void newSession(Session s){
         sessions.add(s);
-        this.notifyHistory("Created new session: "+s.get_type()+" on "+s.get_dateAndHour()+" with instructor: "+s.get_instructor().get_person().getName());
+        this.notifyHistory("Created new session: "+s.get_type()+" on "+s.get_dateAndHour()+" with instructor: "+s.get_instructor().getName());
     }
     protected void addClient(Client c) throws DuplicateClientException, InvalidAgeException {
-        if(personIsClient(c.getPerson())){
+        if(personIsClient(c)){
             throw new DuplicateClientException("Error: The client is already registered");
         }
-        else if(!isAbove18(c.getPerson().getDateOfBirth())){
+        else if(!isAbove18(c.getDateOfBirth())){
             throw new InvalidAgeException("Error: gym.customers.entities.Client must be at least 18 years old to register");
         }
         else{
@@ -52,7 +52,7 @@ public class Gym {
         }
     }
     protected void removeClient(Client c) throws ClientNotRegisteredException {
-        if(personIsClient(c.getPerson())){
+        if(personIsClient(c)){
             clients.remove(c);
             history.update("Unregistered client: " + c.getName());
         }
@@ -109,7 +109,7 @@ public class Gym {
     }
     private boolean personIsClient(Person p){
         for (Client client : clients) {
-            if (client.getPerson() == p) return true;
+            if (client.getId() == p.getId()) return true;
         }
         return false;
     }
@@ -123,7 +123,7 @@ public class Gym {
     }
     protected void addInstructor(Instructor instructor){
         instructors.add(instructor);
-        history.update("Hired new instructor: "+instructor.get_person().getName()+" with salary per hour: "+instructor.get_paymentPerHour());
+        history.update("Hired new instructor: "+instructor.getName()+" with salary per hour: "+instructor.get_paymentPerHour());
     }
 
     protected boolean isClients(Client c) {

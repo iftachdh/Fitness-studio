@@ -1,17 +1,20 @@
 package gym.customers;
 
+import gym.management.Gym;
+
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 
 public class Person {
-    private String name;
-    private int balance;
-    private Gender gender;
-    private LocalDate dateOfBirth;
-    private String dateOfBirthString;
-    private int id;
+    protected String name;
+    protected int balance;
+    protected Gender gender;
+    protected LocalDate dateOfBirth;
+    protected String dateOfBirthString;
+    protected int id;
     private static int totalID=1111;
+    private static final Bank bank = Bank.getInstance();
 
     public Person(String name, int balance, Gender gender, String dateOfBirth) {
         this.name = name;
@@ -21,6 +24,7 @@ public class Person {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         this.dateOfBirth = LocalDate.parse(dateOfBirth, formatter);
         this.id=totalID++;
+        bank.
     }
 
     @Override
@@ -66,6 +70,14 @@ public class Person {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getDateOfBirthString() {
+        return dateOfBirthString;
+    }
+
+    public void setDateOfBirthString(String dateOfBirthString) {
+        this.dateOfBirthString = dateOfBirthString;
     }
 
     public int getAge(){

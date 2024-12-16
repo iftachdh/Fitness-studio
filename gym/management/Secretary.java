@@ -5,11 +5,9 @@ import gym.customers.Person;
 import gym.Exception.*;
 import gym.management.Sessions.SessionType;
 import gym.management.Sessions.SessionsFactory;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -58,7 +56,7 @@ public class Secretary {
         if(register.LegalRegister()){
             s1.addClient(c1);
             _gym.setGymBalance(_gym.getGymBalance()+s1.get_price());
-            c1.getPerson().setBalance(c1.getPerson().getBalance()-s1.get_price());
+            c1.setBalance(c1.getBalance()-s1.get_price());
             _gym.notifyHistory("Registered client: "+c1.getName()+" to session: "+s1.get_type()+" on "+s1.get_dateAndHour()+" for price: "+s1.get_price());
         }
     }
@@ -71,7 +69,7 @@ public class Secretary {
             Session session = iterator.next();
             if(session.get_dateAndHour().isBefore(currentTime)){
                 if(!session.is_payed()){
-                    Person instructor = session.get_instructor().get_person();
+                    Instructor instructor = session.get_instructor();
                     int payment = session.get_price();
                     instructor.setBalance(instructor.getBalance()+payment);
                     _gym.setGymBalance(_gym.getGymBalance()-payment);

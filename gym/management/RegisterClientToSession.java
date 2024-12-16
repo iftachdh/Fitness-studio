@@ -43,7 +43,7 @@ public class RegisterClientToSession {
             c=false;
         }
         boolean d=true;
-        if (_client.getPerson().getBalance() < _session.get_price()){
+        if (_client.getBalance() < _session.get_price()){
             _gym.getHistory().update("Failed registration: gym.customers.Client doesn't have enough balance");
             d=false;
         }
@@ -53,21 +53,21 @@ public class RegisterClientToSession {
     private boolean chekesLeagalForumType(){
         if(_session.get_forumType().equals(ForumType.All))return true;
         else if(_session.get_forumType().equals(ForumType.Male)) {
-            if (_client.getPerson().getGender().equals(Gender.Male)) return true;
+            if (_client.getGender().equals(Gender.Male)) return true;
             else {
                 _gym.getHistory().update("Failed registration: gym.customers.Client's gender doesn't match the session's gender requirements");
                 return false;
             }
         }
         else if(_session.get_forumType().equals(ForumType.Female)) {
-            if (_client.getPerson().getGender().equals(Gender.Female)) return true;
+            if (_client.getGender().equals(Gender.Female)) return true;
             else {
                 _gym.getHistory().update("Failed registration: gym.customers.Client's gender doesn't match the session's gender requirements");
                 return false;
             }
         }
         else if(_session.get_forumType().equals(ForumType.Seniors)){
-            if(isAbove65(_client.getPerson().getDateOfBirth())) return true;
+            if(isAbove65(_client.getDateOfBirth())) return true;
             else{
                 _gym.getHistory().update("Failed registration: gym.customers.Client doesn't meet the age requirements for this session (Seniors)");
                 return false;

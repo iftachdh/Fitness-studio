@@ -32,7 +32,7 @@ public abstract class Session {
 
     @Override
     public String toString() {
-        return ("Session Type: "+_type+" | Date: "+_dateAndHourString+" | Forum: "+_forumType+" | Instructor: "+_instructor.get_person().getName()+" | Participants: "+_NumOfRegisters+"/"+_registers.length);
+        return ("Session Type: "+_type+" | Date: "+_dateAndHourString+" | Forum: "+_forumType+" | Instructor: "+_instructor.getName()+" | Participants: "+_NumOfRegisters+"/"+_registers.length);
     }
 
     protected void notifyClients(String msg) {
