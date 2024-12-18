@@ -11,39 +11,39 @@ import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 import java.util.List;
 
-public class Secretary {
-    private Person _person;
+public class Secretary extends Person {
     private int _salary;
     private static final Gym _gym = Gym.getInstance();
+    private static final RegistrationToSession _registrationToSession = RegistrationToSession.getInstance();
 
     public Secretary(Person p, int salary){
-        this._person = p;
+        super(p.getName(), p.getBalance(),p.getGender(), p.getDateOfBirthString());
         this._salary = salary;
     }
 
     @Override
     public String toString() {
-        return (_person+" | Role: gym.management.Secretary | Salary per Month: "+_salary);
+        return ("ID: "+id+" | Name: "+name+" | gym.customers.Gender: "+gender+" | Birthday: "+dateOfBirthString+" | Age: "+getAge()+" | Balance: "+getBalance()+" | Role: gym.management.Secretary | Salary per Month: "+_salary);
     }
 
     public Client registerClient(Person p) throws InvalidAgeException, DuplicateClientException {
-        if(_gym.getSecretary()!=this) throw new NullPointerException("Error: Former secretaries are not permitted to perform actions");
+        this.currentSecretary();
         Client c = new Client(p);
         _gym.addClient(c);
         return c;
     }
     public void unregisterClient(Client c) throws ClientNotRegisteredException {
-        if(_gym.getSecretary()!=this) throw new NullPointerException("Error: Former secretaries are not permitted to perform actions");
+        this.currentSecretary();
         _gym.removeClient(c);
     }
     public Instructor hireInstructor(Person p, int payment, List<SessionType> sessions){
-        if(_gym.getSecretary()!=this) throw new NullPointerException("Error: Former secretaries are not permitted to perform actions");
+        this.currentSecretary();
         Instructor instructor = new Instructor(p, payment, sessions);
         _gym.addInstructor(instructor);
         return instructor;
     }
     public Session addSession (SessionType type, String dateAndHour, ForumType forumType, Instructor instructor) throws InstructorNotQualifiedException {
-        if(_gym.getSecretary()!=this) throw new NullPointerException("Error: Former secretaries are not permitted to perform actions");
+        this.currentSecretary();
         SessionsFactory factory = new SessionsFactory();
         Session s = factory.CreateSession(type,dateAndHour,forumType,instructor);
         _gym.newSession(s);
@@ -51,9 +51,8 @@ public class Secretary {
     }
 
     public void registerClientToLesson(Client c1, Session s1) throws DuplicateClientException, ClientNotRegisteredException {
-        if(_gym.getSecretary()!=this) throw new NullPointerException("Error: Former secretaries are not permitted to perform actions");
-        RegisterClientToSession register = new RegisterClientToSession(c1,s1);
-        if(register.LegalRegister()){
+        this.currentSecretary();
+        if(_registrationToSession.LegalRegister(c1,s1)){
             s1.addClient(c1);
             _gym.setGymBalance(_gym.getGymBalance()+s1.get_price());
             c1.setBalance(c1.getBalance()-s1.get_price());
@@ -61,7 +60,7 @@ public class Secretary {
         }
     }
     public void paySalaries(){
-        if(_gym.getSecretary()!=this) throw new NullPointerException("Error: Former secretaries are not permitted to perform actions");
+        this.currentSecretary();
         List<Session> sessions = _gym.getSessions();
         LocalDateTime currentTime = LocalDateTime.now();
         Iterator<Session> iterator = sessions.iterator();
@@ -79,21 +78,21 @@ public class Secretary {
         _gym.notifyHistory("Salaries have been paid to all employees");
     }
     public void printActions(){
-        if(_gym.getSecretary()!=this) throw new NullPointerException("Error: Former secretaries are not permitted to perform actions");
+        this.currentSecretary();
         _gym.getHistory().Print();
     }
     public void notify(Session session, String msg){
-        if(_gym.getSecretary()!=this) throw new NullPointerException("Error: Former secretaries are not permitted to perform actions");
+        this.currentSecretary();
         session.notifyClients(msg);
         _gym.notifyHistory("A message was sent to everyone registered for session "+session.get_type()+" on "+session.get_dateAndHour()+" : "+msg);
     }
     public void notify(String msg){
-        if(_gym.getSecretary()!=this) throw new NullPointerException("Error: Former secretaries are not permitted to perform actions");
+        this.currentSecretary();
         _gym.notifyClients(msg);
         _gym.notifyHistory("A message was sent to all gym clients: "+msg);
     }
     public void notify(String day, String msg){
-        if(_gym.getSecretary()!=this) throw new NullPointerException("Error: Former secretaries are not permitted to perform actions");
+        this.currentSecretary();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate theDay = LocalDate.parse(day, formatter);
         List<Session> sessions = _gym.getSessions();
@@ -103,16 +102,11 @@ public class Secretary {
         _gym.notifyHistory("A message was sent to everyone registered for a session on "+theDay+" : "+msg);
     }
     public void notifyByDay(Session session, String msg){
-        if(_gym.getSecretary()!=this) throw new NullPointerException("Error: Former secretaries are not permitted to perform actions");
+        this.currentSecretary();
         session.notifyClients(msg);
     }
-
-    public Person get_person() {
-        return _person;
-    }
-
-    public void set_person(Person _person) {
-        this._person = _person;
+    public void currentSecretary(){
+        if(_gym.getSecretary()!=this) throw new NullPointerException("Error: Former secretaries are not permitted to perform actions");
     }
 
     public int get_salary() {

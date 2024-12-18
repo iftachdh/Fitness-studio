@@ -8,17 +8,19 @@ import gym.customers.Gender;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
-import java.time.format.DateTimeFormatter;
 
-public class RegisterClientToSession {
-    private Client _client;
-    private Session _session;
+public class RegistrationToSession {
+    private static RegistrationToSession instance;
     private static final Gym _gym = Gym.getInstance();
-    protected RegisterClientToSession(Client client, Session session){
-        this._client=client;
-        this._session=session;
+    private RegistrationToSession(){
     }
-    protected boolean LegalRegister () throws DuplicateClientException, ClientNotRegisteredException {
+    public static RegistrationToSession getInstance(){
+        if (instance==null){
+            instance=new RegistrationToSession();
+        }
+        return instance;
+    }
+    protected boolean LegalRegister (Client _client, Session _session) throws DuplicateClientException, ClientNotRegisteredException {
         if(!_gym.isClients(_client)){
             throw new ClientNotRegisteredException("Error: The client is not registered with the gym and cannot enroll in lessons");
         }
@@ -34,7 +36,7 @@ public class RegisterClientToSession {
             a=false;
         }
         boolean b=true;
-        if(!this.chekesLeagalForumType()){
+        if(!this.chekesLeagalForumType(_client,_session)){
             b=false;
         }
         boolean c=true;
@@ -50,7 +52,7 @@ public class RegisterClientToSession {
         return (a&&b&&c&&d);
     }
 
-    private boolean chekesLeagalForumType(){
+    private boolean chekesLeagalForumType(Client _client, Session _session){
         if(_session.get_forumType().equals(ForumType.All))return true;
         else if(_session.get_forumType().equals(ForumType.Male)) {
             if (_client.getGender().equals(Gender.Male)) return true;
