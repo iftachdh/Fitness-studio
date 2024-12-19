@@ -13,6 +13,7 @@ import java.util.List;
 
 public class Secretary extends Person {
     private int _salary;
+    private LocalDate _lastPayment;
     private static final Gym _gym = Gym.getInstance();
     private static final RegistrationToSession _registrationToSession = RegistrationToSession.getInstance();
 
@@ -61,8 +62,14 @@ public class Secretary extends Person {
     }
     public void paySalaries(){
         this.currentSecretary();
-        _gym.setGymBalance(_gym.getGymBalance()-_salary);
-        this.setBalance(this.getBalance()+_salary);
+        LocalDate now = LocalDate.now();
+        for (Secretary secretary : _gym.getSecretaries()){
+            if(secretary.get_lastPayment()==null||secretary.get_lastPayment().getMonth()!=now.getMonth()){
+                _gym.setGymBalance(_gym.getGymBalance()-secretary.get_salary());
+                secretary.setBalance(secretary.getBalance()+secretary.get_salary());
+                _lastPayment=now;
+            }
+        }
         List<Session> sessions = _gym.getSessions();
         Iterator<Session> iterator = sessions.iterator();
         while (iterator.hasNext()) {
@@ -105,6 +112,10 @@ public class Secretary extends Person {
         this.currentSecretary();
         session.notifyClients(msg);
     }
+    public void fireOtherSecretary(Secretary s){
+        this.currentSecretary();
+        _gym.fireSecretary(s);
+    }
     public void currentSecretary(){
         if(_gym.getSecretary()!=this) throw new NullPointerException("Error: Former secretaries are not permitted to perform actions");
     }
@@ -117,4 +128,11 @@ public class Secretary extends Person {
         this._salary = _salary;
     }
 
+    public LocalDate get_lastPayment() {
+        return _lastPayment;
+    }
+
+    public void set_lastPayment(LocalDate _lastPayment) {
+        this._lastPayment = _lastPayment;
+    }
 }

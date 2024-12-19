@@ -20,11 +20,13 @@ public class Gym {
     private List<Client> clients;
     private List<Session> sessions;
     private Vlog history;
+    private List<Secretary> secretaries;
 
     private Gym() {
         this.instructors = new ArrayList<>();
         this.clients = new ArrayList<>();
         this.sessions = new ArrayList<>();
+        this.secretaries = new ArrayList<>();
         this.history = new Vlog();
         this.gymBalance = 0;
     }
@@ -66,12 +68,24 @@ public class Gym {
     }
 
     public void setSecretary(Person p, int salary){
-
         this.secretary=new Secretary(p,salary);
+        if(!secretaries.contains(secretary)){
+            secretaries.add(secretary);
+        }
         history.update("A new secretary has started working at the gym: " + p.getName());
     }
     public Secretary getSecretary(){
         return this.secretary;
+    }
+    protected void fireSecretary(Secretary s){
+        if(s==secretary)throw new RuntimeException("Secretary can't fire herself");
+        else{
+            for(Secretary temp : secretaries){
+                if(temp==s){
+                    secretaries.remove(s);
+                }
+            }
+        }
     }
 
     @Override
@@ -180,5 +194,13 @@ public class Gym {
 
     public void setSessions(List<Session> sessions) {
         this.sessions = sessions;
+    }
+
+    public List<Secretary> getSecretaries() {
+        return secretaries;
+    }
+
+    public void setSecretaries(List<Secretary> secretaries) {
+        this.secretaries = secretaries;
     }
 }
