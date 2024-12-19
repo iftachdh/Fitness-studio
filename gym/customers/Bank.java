@@ -2,7 +2,7 @@ package gym.customers;
 
 import java.util.HashMap;
 
-public class Bank {//orbibi
+public class Bank {//etet
 
     private static HashMap<Integer, Integer> accounts;
     private static Bank instance;
