@@ -19,7 +19,7 @@ public class Gym {
     private List<Instructor> instructors;
     private List<Client> clients;
     private List<Session> sessions;
-    private Vlog history;
+    private Vlog history;//dgd
 
     private Gym() {
         this.instructors = new ArrayList<>();
