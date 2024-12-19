@@ -79,7 +79,9 @@ public class Person {
     }
 
     public int getAge(){
-        LocalDate now = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate now = LocalDate.parse("25-12-2024", formatter);
+        //LocalDate now = LocalDate.now();
         Period period = Period.between(dateOfBirth, now);
         return period.getYears();
     }
