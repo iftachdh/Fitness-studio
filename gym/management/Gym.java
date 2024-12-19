@@ -94,7 +94,7 @@ public class Gym {
 
         ans=ans+("Sessions Data:");
         for (Session session : sessions){
-            ans=(ans+"/n"+session);
+            ans=(ans+"/n"+session);//change
         }
         return ans;
     }
