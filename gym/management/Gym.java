@@ -37,35 +37,6 @@ public class Gym {
         }
         return instance;
     }
-    protected void newSession(Session s){
-        sessions.add(s);
-        this.notifyHistory("Created new session: "+s.get_type()+" on "+s.get_dateAndHour()+" with instructor: "+s.get_instructor().getName());
-    }
-    protected void addClient(Client c) throws DuplicateClientException, InvalidAgeException {
-        if(personIsClient(c)){
-            throw new DuplicateClientException("Error: The client is already registered");
-        }
-        else if(!isAbove18(c.getDateOfBirth())){
-            throw new InvalidAgeException("Error: Client must be at least 18 years old to register");
-        }
-        else{
-            clients.add(c);
-            history.update("Registered new client: " + c.getName());
-        }
-    }
-    protected void removeClient(Client c) throws ClientNotRegisteredException {
-        if(personIsClient(c)){
-            clients.remove(c);
-            history.update("Unregistered client: " + c.getName());
-        }
-        else{
-            throw new ClientNotRegisteredException("Error: Registration is required before attempting to unregister");
-        }
-    }
-
-    public void setName(String name){
-       this.name=name;
-    }
 
     public void setSecretary(Person p, int salary){
         this.secretary=new Secretary(p,salary);
@@ -112,21 +83,6 @@ public class Gym {
         }
         return ans;
     }
-    private static boolean isAbove18(LocalDate birthDate) {
-        // the LocalDate of this moment
-        LocalDate currentDate = LocalDate.now();
-        // calculate the age
-        Period period = Period.between(birthDate, currentDate);
-        int age = period.getYears();
-        // check if the client is above 18
-        return age >= 18;
-    }
-    private boolean personIsClient(Person p){
-        for (Client client : clients) {
-            if (client.getId() == p.getId()) return true;
-        }
-        return false;
-    }
     protected void notifyClients(String msg) {
         for (Client client : clients) {
             client.update(msg);
@@ -134,10 +90,6 @@ public class Gym {
     }
     protected void notifyHistory(String msg){
         history.update(msg);
-    }
-    protected void addInstructor(Instructor instructor){
-        instructors.add(instructor);
-        history.update("Hired new instructor: "+instructor.getName()+" with salary per hour: "+instructor.get_paymentPerHour());
     }
 
     protected boolean isClients(Client c) {
@@ -170,6 +122,9 @@ public class Gym {
 
     public String getName() {
         return name;
+    }
+    public void setName(String name){
+        this.name=name;
     }
 
     public void setSecretary(Secretary secretary) {

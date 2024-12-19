@@ -24,7 +24,7 @@ public class Person {
         this.id=totalID++;
         bank.changeBalance(id,balance);
     }
-    public Person(String name, int balance, Gender gender, String dateOfBirth, int id) {
+    protected Person(String name, int balance, Gender gender, String dateOfBirth, int id) {
         this.name = name;
         this.gender = gender;
         this.dateOfBirthString=dateOfBirth;
@@ -90,7 +90,7 @@ public class Person {
     public int getAge(){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         LocalDate now = LocalDate.parse("25-12-2024", formatter);
-        //LocalDate now = LocalDate.now();
+        //LocalDate now = LocalDate.now();////////////////////////////////////////////////
         Period period = Period.between(dateOfBirth, now);
         return period.getYears();
     }

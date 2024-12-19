@@ -6,6 +6,14 @@ import gym.management.Instructor;
 import gym.management.Session;
 
 public class SessionsFactory {
+    private static SessionsFactory instance;
+    private SessionsFactory(){}
+    public static SessionsFactory getInstance(){
+        if(instance==null){
+            instance=new SessionsFactory();
+        }
+        return instance;
+    }
     public Session CreateSession(SessionType type, String dateAndHour, ForumType forumType, Instructor instructor) throws InstructorNotQualifiedException {
 
         if(type.equals(SessionType.Pilates)){
@@ -35,6 +43,6 @@ public class SessionsFactory {
             }
             else throw new InstructorNotQualifiedException ("Error: Instructor is not qualified to conduct this session type.");
         }
-        else return null; //throw exception type not good
+        else return null;
     }
 }

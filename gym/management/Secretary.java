@@ -6,7 +6,6 @@ import gym.Exception.*;
 import gym.management.Sessions.SessionType;
 import gym.management.Sessions.SessionsFactory;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 import java.util.List;
@@ -15,6 +14,8 @@ public class Secretary extends Person {
     private int _salary;
     private LocalDate _lastPayment;
     private static final Gym _gym = Gym.getInstance();
+    private static final SessionsFactory _sessionFactory = SessionsFactory.getInstance();
+    private static final RegistrationToGym _registrationToGym = RegistrationToGym.getInstance();
     private static final RegistrationToSession _registrationToSession = RegistrationToSession.getInstance();
 
     public Secretary(Person p, int salary){
@@ -29,26 +30,36 @@ public class Secretary extends Person {
 
     public Client registerClient(Person p) throws InvalidAgeException, DuplicateClientException {
         this.currentSecretary();
-        Client c = new Client(p);
-        _gym.addClient(c);
-        return c;
+        return _registrationToGym.addClient(p);
     }
     public void unregisterClient(Client c) throws ClientNotRegisteredException {
         this.currentSecretary();
-        _gym.removeClient(c);
+        _registrationToGym.removeClient(c);
     }
     public Instructor hireInstructor(Person p, int payment, List<SessionType> sessions){
         this.currentSecretary();
         Instructor instructor = new Instructor(p, payment, sessions);
-        _gym.addInstructor(instructor);
+        _gym.getInstructors().add(instructor);
+        _gym.notifyHistory("Hired new instructor: "+instructor.getName()+" with salary per hour: "+instructor.get_paymentPerHour());
         return instructor;
     }
     public Session addSession (SessionType type, String dateAndHour, ForumType forumType, Instructor instructor) throws InstructorNotQualifiedException {
         this.currentSecretary();
-        SessionsFactory factory = new SessionsFactory();
-        Session s = factory.CreateSession(type,dateAndHour,forumType,instructor);
-        _gym.newSession(s);
-        return s;
+        if(this.instructorIsVaild(instructor,dateAndHour)){
+            Session s = _sessionFactory.CreateSession(type,dateAndHour,forumType,instructor);
+            _gym.getSessions().add(s);
+            _gym.notifyHistory("Created new session: "+s.get_type()+" on "+s.get_dateAndHour()+" with instructor: "+s.get_instructor().getName());
+            return s;
+        }
+        else{
+            throw new NullPointerException("The instructor already have session in that time");
+        }
+    }
+    private boolean instructorIsVaild(Instructor i, String dateAndHour){
+        for (Session s : _gym.getSessions()){
+            if(s.get_dateAndHourString().equals(dateAndHour)&&s.get_instructor()==i)return false;
+        }
+        return true;
     }
 
     public void registerClientToLesson(Client c1, Session s1) throws DuplicateClientException, ClientNotRegisteredException {
@@ -74,12 +85,12 @@ public class Secretary extends Person {
         Iterator<Session> iterator = sessions.iterator();
         while (iterator.hasNext()) {
             Session session = iterator.next();
-            if(!session.is_payed()){
+            if(!session.is_payedToInstructor()){
                 Instructor instructor = session.get_instructor();
                 int payment = instructor.get_paymentPerHour();
                 instructor.setBalance(instructor.getBalance()+payment);
                 _gym.setGymBalance(_gym.getGymBalance()-payment);
-                session.set_payed(true);
+                session.set_payedToInstructor(true);
             }
         }
         _gym.notifyHistory("Salaries have been paid to all employees");

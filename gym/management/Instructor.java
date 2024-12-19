@@ -4,7 +4,7 @@ import gym.customers.Person;
 import gym.management.Sessions.SessionType;
 import java.util.List;
 
-public class Instructor extends Person {
+public class Instructor extends Person { // implemts observ
     private int _paymentPerHour;
     private List<SessionType> _sessions;
 
