@@ -44,7 +44,7 @@ public class Gym {
             throw new DuplicateClientException("Error: The client is already registered");
         }
         else if(!isAbove18(c.getDateOfBirth())){
-            throw new InvalidAgeException("Error: gym.customers.entities.Client must be at least 18 years old to register");
+            throw new InvalidAgeException("Error: gym.customers.Client must be at least 18 years old to register");
         }
         else{
             clients.add(c);
