@@ -92,9 +92,9 @@ public class Gym {
         ans=ans+(secretary+"\n");
         ans=ans+"\n";
 
-        ans=ans+("Sessions Data:"+"\n");
+        ans=ans+("Sessions Data:");
         for (Session session : sessions){
-            ans=(ans+session+"\n");
+            ans=(ans+"/n"+session);
         }
         return ans;
     }
