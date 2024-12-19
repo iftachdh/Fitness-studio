@@ -46,7 +46,7 @@ public class Gym {
             throw new DuplicateClientException("Error: The client is already registered");
         }
         else if(!isAbove18(c.getDateOfBirth())){
-            throw new InvalidAgeException("Error: gym.customers.Client must be at least 18 years old to register");
+            throw new InvalidAgeException("Error: Client must be at least 18 years old to register");
         }
         else{
             clients.add(c);
@@ -90,9 +90,9 @@ public class Gym {
 
     @Override
     public String toString (){
-        String ans = ("gym.Exception.management.Gym Name: "+name+"\n"+
-                     "gym.management.Gym gym.management.Secretary: "+secretary+"\n"+
-                      "gym.management.Gym Balance: "+gymBalance+"\n"+
+        String ans = ("Gym Name: "+name+"\n"+
+                     "Gym Secretary: "+secretary+"\n"+
+                      "Gym Balance: "+gymBalance+"\n"+
                       "\n"+
                       "Clients Data:"+"\n");
         for (Client client : clients){

@@ -15,7 +15,7 @@ public class Instructor extends Person {
     }
     @Override
     public String toString() {
-        return ("ID: "+id+" | Name: "+name+" | gym.customers.Gender: "+gender+" | Birthday: "+dateOfBirthString+" | Age: "+getAge()+" | Balance: "+getBalance()+" | Role: Instructor | Salary per Hour: "+_paymentPerHour+" | Certified Classes: "+sessionToString());
+        return ("ID: "+id+" | Name: "+name+" | Gender: "+gender+" | Birthday: "+dateOfBirthString+" | Age: "+getAge()+" | Balance: "+getBalance()+" | Role: Instructor | Salary per Hour: "+_paymentPerHour+" | Certified Classes: "+sessionToString());
     }
     private String sessionToString(){
         StringBuilder result = new StringBuilder();

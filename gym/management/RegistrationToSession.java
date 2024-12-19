@@ -46,7 +46,7 @@ public class RegistrationToSession {
         }
         boolean d=true;
         if (_client.getBalance() < _session.get_price()){
-            _gym.getHistory().update("Failed registration: gym.customers.Client doesn't have enough balance");
+            _gym.getHistory().update("Failed registration: Client doesn't have enough balance");
             d=false;
         }
         return (a&&b&&c&&d);
@@ -57,21 +57,21 @@ public class RegistrationToSession {
         else if(_session.get_forumType().equals(ForumType.Male)) {
             if (_client.getGender().equals(Gender.Male)) return true;
             else {
-                _gym.getHistory().update("Failed registration: gym.customers.Client's gender doesn't match the session's gender requirements");
+                _gym.getHistory().update("Failed registration: Client's gender doesn't match the session's gender requirements");
                 return false;
             }
         }
         else if(_session.get_forumType().equals(ForumType.Female)) {
             if (_client.getGender().equals(Gender.Female)) return true;
             else {
-                _gym.getHistory().update("Failed registration: gym.customers.Client's gender doesn't match the session's gender requirements");
+                _gym.getHistory().update("Failed registration: Client's gender doesn't match the session's gender requirements");
                 return false;
             }
         }
         else if(_session.get_forumType().equals(ForumType.Seniors)){
             if(isAbove65(_client.getDateOfBirth())) return true;
             else{
-                _gym.getHistory().update("Failed registration: gym.customers.Client doesn't meet the age requirements for this session (Seniors)");
+                _gym.getHistory().update("Failed registration: Client doesn't meet the age requirements for this session (Seniors)");
                 return false;
             }
         }

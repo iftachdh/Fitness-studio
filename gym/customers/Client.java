@@ -13,7 +13,7 @@ public class Client extends Person implements Observ {
     }
     @Override
     public String toString() {
-        return ("ID: "+id+" | Name: "+name+" | gym.customers.Gender: "+gender+" | Birthday: "+dateOfBirthString+" | Age: "+getAge()+" | Balance: "+getBalance());
+        return ("ID: "+id+" | Name: "+name+" | Gender: "+gender+" | Birthday: "+dateOfBirthString+" | Age: "+getAge()+" | Balance: "+getBalance());
     }
 
     public ArrayList<String> getNotifications() {

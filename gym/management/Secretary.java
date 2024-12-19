@@ -24,7 +24,7 @@ public class Secretary extends Person {
 
     @Override
     public String toString() {
-        return ("ID: "+id+" | Name: "+name+" | gym.customers.Gender: "+gender+" | Birthday: "+dateOfBirthString+" | Age: "+getAge()+" | Balance: "+getBalance()+" | Role: gym.management.Secretary | Salary per Month: "+_salary);
+        return ("ID: "+id+" | Name: "+name+" | Gender: "+gender+" | Birthday: "+dateOfBirthString+" | Age: "+getAge()+" | Balance: "+getBalance()+" | Role: Secretary | Salary per Month: "+_salary);
     }
 
     public Client registerClient(Person p) throws InvalidAgeException, DuplicateClientException {
