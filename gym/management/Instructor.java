@@ -9,7 +9,7 @@ public class Instructor extends Person {
     private List<SessionType> _sessions;
 
     protected Instructor(Person p, int payment, List<SessionType> sessions){
-        super(p.getName(),p.getBalance(),p.getGender(),p.getDateOfBirthString());
+        super(p.getName(),p.getBalance(),p.getGender(),p.getDateOfBirthString(),p.getId());
         this._paymentPerHour = payment;
         this._sessions = sessions;
     }

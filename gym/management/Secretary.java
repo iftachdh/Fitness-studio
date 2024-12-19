@@ -17,7 +17,7 @@ public class Secretary extends Person {
     private static final RegistrationToSession _registrationToSession = RegistrationToSession.getInstance();
 
     public Secretary(Person p, int salary){
-        super(p.getName(), p.getBalance(),p.getGender(), p.getDateOfBirthString());
+        super(p.getName(), p.getBalance(),p.getGender(), p.getDateOfBirthString(),p.getId());
         this._salary = salary;
     }
 
@@ -61,18 +61,18 @@ public class Secretary extends Person {
     }
     public void paySalaries(){
         this.currentSecretary();
+        _gym.setGymBalance(_gym.getGymBalance()-_salary);
+        this.setBalance(this.getBalance()+_salary);
         List<Session> sessions = _gym.getSessions();
-        LocalDateTime currentTime = LocalDateTime.now();
         Iterator<Session> iterator = sessions.iterator();
         while (iterator.hasNext()) {
             Session session = iterator.next();
-            if(session.get_dateAndHour().isBefore(currentTime)){
-                if(!session.is_payed()&&session._NumOfRegisters>0){
-                    Instructor instructor = session.get_instructor();
-                    int payment = session.get_price();
-                    instructor.setBalance(instructor.getBalance()+payment);
-                    _gym.setGymBalance(_gym.getGymBalance()-payment);
-                }
+            if(!session.is_payed()){
+                Instructor instructor = session.get_instructor();
+                int payment = instructor.get_paymentPerHour();
+                instructor.setBalance(instructor.getBalance()+payment);
+                _gym.setGymBalance(_gym.getGymBalance()-payment);
+                session.set_payed(true);
             }
         }
         _gym.notifyHistory("Salaries have been paid to all employees");

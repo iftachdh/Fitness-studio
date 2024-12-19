@@ -12,8 +12,8 @@ public class Person {
     protected LocalDate dateOfBirth;
     protected String dateOfBirthString;
     protected int id;
-    private static int totalID=1111;
-    private static final Bank bank = Bank.getInstance();
+    protected static int totalID=1111;
+    protected static final Bank bank = Bank.getInstance();
 
     public Person(String name, int balance, Gender gender, String dateOfBirth) {
         this.name = name;
@@ -22,6 +22,15 @@ public class Person {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         this.dateOfBirth = LocalDate.parse(dateOfBirth, formatter);
         this.id=totalID++;
+        bank.changeBalance(id,balance);
+    }
+    public Person(String name, int balance, Gender gender, String dateOfBirth, int id) {
+        this.name = name;
+        this.gender = gender;
+        this.dateOfBirthString=dateOfBirth;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        this.dateOfBirth = LocalDate.parse(dateOfBirth, formatter);
+        this.id=id;
         bank.changeBalance(id,balance);
     }
 

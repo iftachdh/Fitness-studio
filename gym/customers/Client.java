@@ -8,7 +8,7 @@ public class Client extends Person implements Observ {
     private ArrayList<String> Notifications;
 
     public Client(Person p){
-        super(p.getName(), p.getBalance(),p.getGender(),p.getDateOfBirthString());
+        super(p.getName(), p.getBalance(),p.getGender(),p.getDateOfBirthString(),p.getId());
         this.Notifications = new ArrayList<>();
     }
     @Override

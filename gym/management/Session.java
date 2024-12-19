@@ -113,7 +113,7 @@ public abstract class Session {
         return _payed;
     }
 
-    public void set_payed(boolean _payed) {
-        this._payed = _payed;
+    public void set_payed(boolean payed) {
+        this._payed = payed;
     }
 }
