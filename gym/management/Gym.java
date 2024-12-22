@@ -6,6 +6,16 @@ import gym.management.Sessions.Vlog;
 import java.util.ArrayList;
 import java.util.List;
 
+/** Read me
+ *  singleton: Gym,RegistrationToGym, RegistrationToSession, SessionFactory, Bank
+ *  factory: SessionFactory
+ *  observer: Client, Instructor, Vlog
+ *  abstract: Session
+ *  inherits: extend Person: Client, Secretary, Instructor
+ *            extend Sessions: MachinePilates, Ninja, Pilates, ThaiBoxing
+ *            extend Exception: ClientNotRegisteredException, DuplicateClientException, InstructorNotQualifiedException, InvalidAgeException
+ */
+
 public class Gym {
     private static Gym instance;
     private String name;
