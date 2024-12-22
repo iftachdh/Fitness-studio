@@ -2,12 +2,7 @@ package gym.management;
 
 import gym.customers.Client;
 import gym.customers.Person;
-import gym.Exception.ClientNotRegisteredException;
-import gym.Exception.DuplicateClientException;
-import gym.Exception.InvalidAgeException;
 import gym.management.Sessions.Vlog;
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,11 +34,23 @@ public class Gym {
     }
 
     public void setSecretary(Person p, int salary){
-        this.secretary=new Secretary(p,salary);
-        if(!secretaries.contains(secretary)){
+        boolean allraedyhired = false;
+        for(Secretary secretary1 : secretaries){
+            if(secretary1.getId()==p.getId()){
+                this.secretary=secretary1;
+                secretary1.set_salary(salary);
+                allraedyhired=true;
+            }
+        }
+        if(!allraedyhired){
+            this.secretary=new Secretary(p,salary);
             secretaries.add(secretary);
         }
         history.update("A new secretary has started working at the gym: " + p.getName());
+    }
+    public void setSecretaryFromSecretaries(Secretary secretary1){
+        if(secretaries.contains(secretary1))this.secretary=secretary1;
+        else throw new RuntimeException("That secretary not registered!!!");
     }
     public Secretary getSecretary(){
         return this.secretary;

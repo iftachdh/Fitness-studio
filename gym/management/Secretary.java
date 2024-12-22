@@ -36,16 +36,27 @@ public class Secretary extends Person {
         this.currentSecretary();
         _registrationToGym.removeClient(c);
     }
-    public Instructor hireInstructor(Person p, int payment, List<SessionType> sessions){
+    public Instructor hireInstructor(Person p, int payment, List<SessionType> sessions) throws InstructorNotQualifiedException {
         this.currentSecretary();
         Instructor instructor = new Instructor(p, payment, sessions);
-        _gym.getInstructors().add(instructor);
-        _gym.notifyHistory("Hired new instructor: "+instructor.getName()+" with salary per hour: "+instructor.get_paymentPerHour());
-        return instructor;
+        boolean allradyinstractur =false;
+        for(Instructor instructor1 : _gym.getInstructors()){
+            if (instructor1.getId() == instructor.getId()) {
+                allradyinstractur = true;
+                break;
+            }
+        }
+        if (!allradyinstractur){
+            _gym.getInstructors().add(instructor);
+            _gym.notifyHistory("Hired new instructor: "+instructor.getName()+" with salary per hour: "+instructor.get_paymentPerHour());
+            return instructor;
+        }
+        else throw new InstructorNotQualifiedException("The instructor already hired");
     }
+
     public Session addSession (SessionType type, String dateAndHour, ForumType forumType, Instructor instructor) throws InstructorNotQualifiedException {
         this.currentSecretary();
-        if(this.instructorIsVaild(instructor,dateAndHour)){
+        if(_gym.getInstructors().contains(instructor)&&this.instructorIsVaild(instructor,dateAndHour)){
             Session s = _sessionFactory.CreateSession(type,dateAndHour,forumType,instructor);
             _gym.getSessions().add(s);
             _gym.notifyHistory("Created new session: "+s.get_type()+" on "+s.get_dateAndHour()+" with instructor: "+s.get_instructor().getName());
