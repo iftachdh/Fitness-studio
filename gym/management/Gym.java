@@ -2,19 +2,10 @@ package gym.management;
 
 import gym.customers.Client;
 import gym.customers.Person;
-import gym.management.Sessions.Vlog;
+
 import java.util.ArrayList;
 import java.util.List;
 
-/** Read me
- *  singleton: Gym,RegistrationToGym, RegistrationToSession, SessionFactory, Bank
- *  factory: SessionFactory
- *  observer: Client, Instructor, Vlog
- *  abstract: Session
- *  inherits: extend Person: Client, Secretary, Instructor
- *            extend Sessions: MachinePilates, Ninja, Pilates, ThaiBoxing
- *            extend Exception: ClientNotRegisteredException, DuplicateClientException, InstructorNotQualifiedException, InvalidAgeException
- */
 
 public class Gym {
     private static Gym instance;
@@ -24,15 +15,13 @@ public class Gym {
     private List<Instructor> instructors;
     private List<Client> clients;
     private List<Session> sessions;
-    private Vlog history;
-    private List<Secretary> secretaries;
+    private GymLogger history;
 
     private Gym() {
         this.instructors = new ArrayList<>();
         this.clients = new ArrayList<>();
         this.sessions = new ArrayList<>();
-        this.secretaries = new ArrayList<>();
-        this.history = new Vlog();
+        this.history = new GymLogger();
         this.gymBalance = 0;
     }
 
@@ -53,46 +42,12 @@ public class Gym {
      */
 
     public void setSecretary(Person p, int salary){
-        boolean allraedyhired = false;
-        for(Secretary secretary1 : secretaries){
-            if(secretary1.getId()==p.getId()){ // Check if the secretary is already in the list
-                this.secretary=secretary1;     // If the secretary exists, make her current
-                secretary1.set_salary(salary); // If the secretary exists, update her salary
-                allraedyhired=true;
-            }
-        }
-        if(!allraedyhired){ // If the secretary is not found, add her to the list and make her current
-            this.secretary=new Secretary(p,salary);
-            secretaries.add(secretary); // Add her to the list of secretaries
-        }
+        this.secretary=new Secretary(p,salary);
         history.update("A new secretary has started working at the gym: " + p.getName()); // Update the history
     }
 
-    /**
-     * Method to set the secretary of the gym from the list of secretaries
-     * @param secretary1
-     */
-    public void setSecretaryFromSecretaries(Secretary secretary1){
-        if(secretaries.contains(secretary1))this.secretary=secretary1; // If the secretary in the list make her current
-        else throw new RuntimeException("That secretary not registered!!!"); // Else throw error
-    }
     public Secretary getSecretary(){
         return this.secretary;
-    }
-
-    /**
-     * Method to fire secretary
-     * @param s
-     */
-    protected void fireSecretary(Secretary s){
-        if(s==secretary)throw new RuntimeException("Secretary can't fire herself"); // If secretary tries to fire herself throw error
-        else{
-            for(Secretary temp : secretaries){
-                if(temp==s){
-                    secretaries.remove(s); // If the secretary is secretary in the gym remove her
-                }
-            }
-        }
     }
 
     /**
@@ -151,6 +106,7 @@ public class Gym {
         return clients.contains(c);
     }
 
+
     public void setGymBalance(int gymBalance) {
         this.gymBalance = gymBalance;
     }
@@ -163,11 +119,11 @@ public class Gym {
         return sessions;
     }
 
-    public Vlog getHistory() {
+    public GymLogger getHistory() {
         return history;
     }
 
-    public void setHistory(Vlog history) {
+    public void setHistory(GymLogger history) {
         this.history = history;
     }
 
@@ -206,11 +162,4 @@ public class Gym {
         this.sessions = sessions;
     }
 
-    public List<Secretary> getSecretaries() {
-        return secretaries;
-    }
-
-    public void setSecretaries(List<Secretary> secretaries) {
-        this.secretaries = secretaries;
-    }
 }

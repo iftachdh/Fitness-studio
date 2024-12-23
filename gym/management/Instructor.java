@@ -6,16 +6,14 @@ import gym.management.Sessions.SessionType;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Instructor extends Person implements Observ{
+public class Instructor extends Person {
     private int _paymentPerHour;
     private List<SessionType> _sessions;
-    private ArrayList<String> Notifications;
 
     protected Instructor(Person p, int payment, List<SessionType> sessions){
         super(p.getName(),p.getBalance(),p.getGender(),p.getDateOfBirthString(),p.getId());
         this._paymentPerHour = payment;
         this._sessions = sessions;
-        this.Notifications = new ArrayList<>();
     }
     @Override
     public String toString() {
@@ -47,8 +45,4 @@ public class Instructor extends Person implements Observ{
         this._sessions = _sessions;
     }
 
-    @Override
-    public void update(String msg) {
-        this.Notifications.add(msg);
-    }
 }

@@ -1,19 +1,17 @@
-package gym.management.Sessions;
-
-import gym.management.Observ;
+package gym.management;
 
 import java.util.ArrayList;
 
-public class Vlog implements Observ {
+public class GymLogger implements Observ {
     ArrayList<String> history;
-    public Vlog(){
+    public GymLogger(){
         this.history = new ArrayList<>();
     }
     @Override
     public void update(String msg) {
         history.add(msg);
     }
-    public void Print(){
+    protected void Print(){
         for (String s : history){
             System.out.println(s);
         }

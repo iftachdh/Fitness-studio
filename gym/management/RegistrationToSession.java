@@ -20,7 +20,7 @@ public class RegistrationToSession {
         }
         return instance;
     }
-    protected boolean LegalRegister (Client _client, Session _session) throws DuplicateClientException, ClientNotRegisteredException {
+    protected void LegalRegister (Client _client, Session _session) throws DuplicateClientException, ClientNotRegisteredException {
         if(!_gym.isClients(_client)){
             throw new ClientNotRegisteredException("Error: The client is not registered with the gym and cannot enroll in lessons");
         }
@@ -49,7 +49,13 @@ public class RegistrationToSession {
             _gym.getHistory().update("Failed registration: Client doesn't have enough balance");
             d=false;
         }
-        return (a&&b&&c&&d);
+        if(a&&b&&c&&d){
+            _session.addClient(_client);
+            _gym.setGymBalance(_gym.getGymBalance()+_session.get_price());
+            _client.setBalance(_client.getBalance()-_session.get_price());
+            _gym.notifyHistory("Registered client: "+_client.getName()+" to session: "+_session.get_type()+" on "+_session.get_dateAndHour()+" for price: "+_session.get_price());
+        }
+
     }
 
     private boolean chekesLeagalForumType(Client _client, Session _session){

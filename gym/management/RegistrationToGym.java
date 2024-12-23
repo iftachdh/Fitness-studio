@@ -5,7 +5,6 @@ import gym.Exception.DuplicateClientException;
 import gym.Exception.InvalidAgeException;
 import gym.customers.Client;
 import gym.customers.Person;
-
 import java.time.LocalDate;
 import java.time.Period;
 
