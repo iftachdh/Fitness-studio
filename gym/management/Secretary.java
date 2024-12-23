@@ -4,10 +4,9 @@ import gym.customers.Client;
 import gym.customers.Person;
 import gym.Exception.*;
 import gym.management.Sessions.SessionType;
-import gym.management.Sessions.SessionsFactory;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Iterator;
+
 import java.util.List;
 
 public class Secretary extends Person {
@@ -56,12 +55,10 @@ public class Secretary extends Person {
         _registrationToSession.LegalRegister(c1,s1);
     }
 
-
     public void paySalaries(){
         this.currentSecretary();
         _paySaleries.paySalaries();
     }
-
 
     public void printActions(){
         this.currentSecretary();
@@ -94,6 +91,7 @@ public class Secretary extends Person {
     public void currentSecretary(){
         if(_gym.getSecretary()!=this) throw new NullPointerException("Error: Former secretaries are not permitted to perform actions");
     }
+
 
     public int get_salary() {
         return _salary;
