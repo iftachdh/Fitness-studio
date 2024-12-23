@@ -18,6 +18,7 @@ public class Secretary extends Person {
     private static final RegistrationToSession _registrationToSession = RegistrationToSession.getInstance();
     private static final HireNewInstructor _hireNewInstructor = HireNewInstructor.getInstance();
     private static final AddNewSession _addNewSession = AddNewSession.getInstance();
+    private static final PaySaleries _paySaleries = PaySaleries.getInstance();
 
 
     public Secretary(Person p, int salary){
@@ -58,25 +59,7 @@ public class Secretary extends Person {
 
     public void paySalaries(){
         this.currentSecretary();
-        LocalDate now = LocalDate.now();
-        if(this.get_lastPayment()==null||this.get_lastPayment().getMonth()!=now.getMonth()){
-            _gym.setGymBalance(_gym.getGymBalance()-this.get_salary());
-            this.setBalance(this.getBalance()+this.get_salary());
-            _lastPayment=now;
-        }
-        List<Session> sessions = _gym.getSessions();
-        Iterator<Session> iterator = sessions.iterator();
-        while (iterator.hasNext()) {
-            Session session = iterator.next();
-            if(!session.is_payedToInstructor()){
-                Instructor instructor = session.get_instructor();
-                int payment = instructor.get_paymentPerHour();
-                instructor.setBalance(instructor.getBalance()+payment);
-                _gym.setGymBalance(_gym.getGymBalance()-payment);
-                session.set_payedToInstructor(true);
-            }
-        }
-        _gym.notifyHistory("Salaries have been paid to all employees");
+        _paySaleries.paySalaries();
     }
 
 

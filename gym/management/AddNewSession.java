@@ -1,11 +1,8 @@
 package gym.management;
 
 import gym.Exception.InstructorNotQualifiedException;
-import gym.customers.Person;
 import gym.management.Sessions.SessionType;
 import gym.management.Sessions.SessionsFactory;
-
-import java.util.List;
 
 public class AddNewSession {
 
