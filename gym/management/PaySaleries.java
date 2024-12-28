@@ -3,14 +3,21 @@ package gym.management;
 import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.List;
+/**
+ * Class that exist to help the secretary in paySalaries method, (Singleton pattern).
+ */
 
 public class PaySaleries {
 
     private static PaySaleries instance;
     private static final Gym _gym = Gym.getInstance();
-
+    /**
+     * Private constructor, singleton class
+     */
     private PaySaleries(){}
-
+    /**
+     * Static method to return the Gym instance (Singleton pattern)
+     */
     protected static PaySaleries getInstance(){
         if (instance == null){
             instance = new PaySaleries();
@@ -18,6 +25,13 @@ public class PaySaleries {
         return instance;
     }
 
+    /**
+     * Pay the salaries to the gym secretary and to the instructors.
+     * To the secretary:
+     *  check if she got paid that month, if not - pay her.
+     * To the instructors:
+     *  pay by the sessions that didn't get paid already.
+     */
     protected void paySalaries(){
         LocalDate now = LocalDate.now();
         if(_gym.getSecretary().get_lastPayment()==null||_gym.getSecretary().get_lastPayment().getMonth()!=now.getMonth()){

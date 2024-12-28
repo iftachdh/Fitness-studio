@@ -7,18 +7,40 @@ import gym.customers.Gender;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
+/**
+ * Class that exist to help the secretary in registerClientToLesson method, (Singleton pattern).
+ */
 
 public class RegistrationToSession {
     private static RegistrationToSession instance;
     private static final Gym _gym = Gym.getInstance();
-    private RegistrationToSession(){
-    }
+    /**
+     * Private constructor, singleton class
+     */
+    private RegistrationToSession(){}
+    /**
+     * Static method to return the Gym instance (Singleton pattern)
+     */
     public static RegistrationToSession getInstance(){
         if (instance==null){
             instance=new RegistrationToSession();
         }
         return instance;
     }
+
+    /**
+     * Method that register client to lesson in the gym,
+     * steps:
+     *  1. check if the client is register to the gym.
+     *  2. check if the client is already register to the session.
+     *  3. check if the session is in the future.
+     *  4. check if the client is ok by the forumType
+     * if all good - add the client to the session.
+     * @param _client
+     * @param _session
+     * @throws DuplicateClientException
+     * @throws ClientNotRegisteredException
+     */
     protected void LegalRegister (Client _client, Session _session) throws DuplicateClientException, ClientNotRegisteredException {
         if(!_gym.isClients(_client)){
             throw new ClientNotRegisteredException("Error: The client is not registered with the gym and cannot enroll in lessons");
@@ -57,6 +79,13 @@ public class RegistrationToSession {
 
     }
 
+    /**
+     * Help to the LegalRegister method, check if the client is ok by the forumType.
+     * @param _client
+     * @param _session
+     * @return
+     */
+
     private boolean chekesLeagalForumType(Client _client, Session _session){
         if(_session.get_forumType().equals(ForumType.All))return true;
         else if(_session.get_forumType().equals(ForumType.Male)) {
@@ -83,6 +112,12 @@ public class RegistrationToSession {
 
         else return false;
     }
+
+    /**
+     * Help to the chekesLeagalForumType method, check if the age of the client is 65 or above.
+     * @param birthDate
+     * @return
+     */
     private static boolean isAbove65(LocalDate birthDate) {
         // the LocalDate of this moment
         LocalDate currentDate = LocalDate.now();

@@ -16,6 +16,9 @@ public class Gym {
     private List<Session> sessions;
     private GymLogger history;
 
+    /**
+     * Private constructor, singleton class
+     */
     private Gym() {
         this.instructors = new ArrayList<>();
         this.clients = new ArrayList<>();
@@ -23,7 +26,6 @@ public class Gym {
         this.history = new GymLogger();
         this.gymBalance = 0;
     }
-
     /**
      * Static method to return the Gym instance (Singleton pattern)
      */
@@ -33,7 +35,6 @@ public class Gym {
         }
         return instance;
     }
-
     /**
      * Method to set or update the secretary of the gym
      * @param p

@@ -4,19 +4,38 @@ import gym.customers.Person;
 import gym.management.Sessions.SessionType;
 import java.util.List;
 
+/**
+ * Instructor, implement person, have also paymentPerHour-int, and sessions-list of kind of session that he can teach.
+ */
 public class Instructor extends Person {
     private int _paymentPerHour;
     private List<SessionType> _sessions;
 
+    /**
+     * Protected constructor so the secretary will be able to create one, but not public - so you cant create one strait from the main.
+     * @param p
+     * @param payment
+     * @param sessions
+     */
     protected Instructor(Person p, int payment, List<SessionType> sessions){
         super(p.getName(),p.getBalance(),p.getGender(),p.getDateOfBirthString(),p.getId());
         this._paymentPerHour = payment;
         this._sessions = sessions;
     }
+
+    /**
+     * Make string from instructor.
+     * @return
+     */
     @Override
     public String toString() {
         return ("ID: "+id+" | Name: "+name+" | Gender: "+gender+" | Birthday: "+dateOfBirthString+" | Age: "+getAge()+" | Balance: "+getBalance()+" | Role: Instructor | Salary per Hour: "+_paymentPerHour+" | Certified Classes: "+sessionToString());
     }
+
+    /**
+     * Help to the toString method.
+     * @return
+     */
     private String sessionToString(){
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < _sessions.size(); i++) {
