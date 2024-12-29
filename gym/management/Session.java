@@ -45,7 +45,7 @@ public abstract class Session {
         return _type;
     }
 
-    public void set_type(SessionType _type) {
+    protected void set_type(SessionType _type) {
         this._type = _type;
     }
 
@@ -53,7 +53,7 @@ public abstract class Session {
         return _dateAndHour;
     }
 
-    public void set_dateAndHour(LocalDateTime _dateAndHour) {
+    protected void set_dateAndHour(LocalDateTime _dateAndHour) {
         this._dateAndHour = _dateAndHour;
     }
 
@@ -61,7 +61,7 @@ public abstract class Session {
         return _forumType;
     }
 
-    public void set_forumType(ForumType _forumType) {
+    protected void set_forumType(ForumType _forumType) {
         this._forumType = _forumType;
     }
 
@@ -69,7 +69,7 @@ public abstract class Session {
         return _instructor;
     }
 
-    public void set_instructor(Instructor _instructor) {
+    protected void set_instructor(Instructor _instructor) {
         this._instructor = _instructor;
     }
 
@@ -77,7 +77,7 @@ public abstract class Session {
         return _registers;
     }
 
-    public void set_registers(Client[] _registers) {
+    protected void set_registers(Client[] _registers) {
         this._registers = _registers;
     }
 
@@ -85,7 +85,7 @@ public abstract class Session {
         return _NumOfRegisters;
     }
 
-    public void set_NumOfRegisters(int _NumOfRegisters) {
+    protected void set_NumOfRegisters(int _NumOfRegisters) {
         this._NumOfRegisters = _NumOfRegisters;
     }
 
@@ -93,7 +93,7 @@ public abstract class Session {
         return _price;
     }
 
-    public void set_price(int _price) {
+    protected void set_price(int _price) {
         this._price = _price;
     }
 
@@ -101,15 +101,15 @@ public abstract class Session {
         return _dateAndHourString;
     }
 
-    public void set_dateAndHourString(String _dateAndHourString) {
+    protected void set_dateAndHourString(String _dateAndHourString) {
         this._dateAndHourString = _dateAndHourString;
     }
 
-    public boolean is_payedToInstructor() {
+    protected boolean is_payedToInstructor() {
         return _payedToInstructor;
     }
 
-    public void set_payedToInstructor(boolean payed) {
+    protected void set_payedToInstructor(boolean payed) {
         this._payedToInstructor = payed;
     }
 }
