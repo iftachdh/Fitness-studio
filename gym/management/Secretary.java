@@ -98,7 +98,7 @@ public class Secretary extends Person {
         return _salary;
     }
 
-    public void set_salary(int _salary) {
+    protected void set_salary(int _salary) {
         this._salary = _salary;
     }
 
