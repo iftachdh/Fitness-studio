@@ -107,6 +107,7 @@ public class Gym {
     }
 
 
+
     protected void setGymBalance(int gymBalance) {
         this.gymBalance = gymBalance;
     }

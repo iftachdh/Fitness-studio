@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
 /**
- * Class that exist to help the secretary in registerClientToLesson method, (Singleton pattern).
+ * This Class exist to help the secretary in registerClientToLesson method, (Singleton pattern).
  */
 
 public class RegistrationToSession {

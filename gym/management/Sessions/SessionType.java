@@ -8,4 +8,5 @@ public enum SessionType {
     MachinePilates,
     ThaiBoxing,
     Ninja,
+
 }

@@ -1,8 +1,12 @@
 package gym.customers;
 
 import gym.management.Observ;
-
 import java.util.ArrayList;
+
+/**
+ * This class represents a client that extends Person,
+ * and he has a list of massages that he receives from the Gym
+ */
 
 public class Client extends Person implements Observ {
     private ArrayList<String> Notifications;
@@ -18,10 +22,6 @@ public class Client extends Person implements Observ {
 
     public ArrayList<String> getNotifications() {
         return Notifications;
-    }
-
-    public void setNotifications(ArrayList<String> notifications) {
-        Notifications = notifications;
     }
 
     @Override

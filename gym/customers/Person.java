@@ -1,10 +1,12 @@
 package gym.customers;
 
-import gym.management.Gym;
-
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
+
+/**
+ * This class represents Person
+ */
 
 public class Person {
     protected String name;
@@ -38,6 +40,9 @@ public class Person {
     public String toString() {
         return ("ID: "+id+" | Name: "+name+" | gym.customers.Gender: "+gender+" | Birthday: "+dateOfBirthString+" | Age: "+getAge()+" | Balance: "+bank.GetBalance(id));
     }
+
+    // ///////////// Getters & Setters /////////////////
+
 
     public String getName() {
         return name;
@@ -87,6 +92,10 @@ public class Person {
         this.dateOfBirthString = dateOfBirthString;
     }
 
+    /**
+     * This method calculates the current age of the person
+     * @return age in years
+     */
     public int getAge(){
         LocalDate now = LocalDate.now();
         Period period = Period.between(dateOfBirth, now);

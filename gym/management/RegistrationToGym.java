@@ -8,7 +8,8 @@ import gym.customers.Person;
 import java.time.LocalDate;
 import java.time.Period;
 /**
- * Class that exist to help the secretary in registerClient and unregisterClient methods, (Singleton pattern).
+ * This Class exist to help the secretary in registerClient and unregisterClient methods,
+ * (Singleton pattern).
  */
 
 public class RegistrationToGym {

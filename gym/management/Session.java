@@ -16,6 +16,7 @@ public abstract class Session {
     protected int _NumOfRegisters=0;
     protected int _price;
     protected boolean _payedToInstructor;
+
     protected Session(SessionType type, String dateAndHour, ForumType forumType, Instructor instructor){
         this._type = type;
         this._dateAndHourString=dateAndHour;

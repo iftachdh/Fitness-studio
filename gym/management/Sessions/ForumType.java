@@ -1,7 +1,7 @@
 package gym.management.Sessions;
 
 /**
- * Enum method - the type of people that can enter a class
+ * Enum class - the type of people that can enter a class
  */
 
 public enum ForumType {

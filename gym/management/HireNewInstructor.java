@@ -5,7 +5,7 @@ import gym.customers.Person;
 import gym.management.Sessions.SessionType;
 import java.util.List;
 /**
- * Class that exist to help the secretary in hireInstructor method, (Singleton pattern).
+ * This Class exist to help the secretary in hireInstructor method, (Singleton pattern).
  */
 
 public class HireNewInstructor {

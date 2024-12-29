@@ -3,7 +3,7 @@ package gym.management;
 import java.util.ArrayList;
 
 /**
- * We make it to contain all the history of the gym by implements observe (Observ) and 'follow' the gym.
+ * This class contains all the history of the gym by implements observe (Observ) and 'follow' the gym.
  */
 
 public class GymLogger implements Observ {

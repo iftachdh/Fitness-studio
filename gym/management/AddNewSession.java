@@ -6,7 +6,7 @@ import gym.management.Sessions.SessionType;
 import gym.management.Sessions.SessionsFactory;
 
 /**
- * Class that exist to help the secretary in addSession method, (Singleton pattern).
+ * This Class exist to help the secretary in addSession method, (Singleton pattern).
  */
 
 public class AddNewSession {

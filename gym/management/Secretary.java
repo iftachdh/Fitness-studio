@@ -10,6 +10,11 @@ import java.time.format.DateTimeFormatter;
 
 import java.util.List;
 
+/**
+ * This class represents the secretary of the gym,
+ * she is the only one that can do actions and changes in the gym
+ */
+
 public class Secretary extends Person {
     private int _salary;
     private LocalDate _lastPayment;
@@ -20,7 +25,13 @@ public class Secretary extends Person {
     private static final AddNewSession _addNewSession = AddNewSession.getInstance();
     private static final PaySaleries _paySaleries = PaySaleries.getInstance();
 
-
+    /**
+     * The constructor of the secretary,
+     * the constructor is protected because we want to ba able to construct a new secretary
+     * only from the Gym by using "setSecretary" method
+     * @param p
+     * @param salary
+     */
     protected Secretary(Person p, int salary){
         super(p.getName(), p.getBalance(),p.getGender(), p.getDateOfBirthString(),p.getId());
         this._salary = salary;
@@ -31,31 +42,70 @@ public class Secretary extends Person {
         return ("ID: "+id+" | Name: "+name+" | Gender: "+gender+" | Birthday: "+dateOfBirthString+" | Age: "+getAge()+" | Balance: "+getBalance()+" | Role: Secretary | Salary per Month: "+_salary);
     }
 
+    /**
+     * This method register client to the gym by using the "RegistrationToGym" class
+     * @param p
+     * @return the new client
+     * @throws InvalidAgeException
+     * @throws DuplicateClientException
+     */
     public Client registerClient(Person p) throws InvalidAgeException, DuplicateClientException {
         this.currentSecretary();
         return _registrationToGym.addClient(p);
     }
 
+    /**
+     * This method unregister client to the gym by using the "RegistrationToGym" class
+      * @param c
+     * @throws ClientNotRegisteredException
+     */
     public void unregisterClient(Client c) throws ClientNotRegisteredException {
         this.currentSecretary();
         _registrationToGym.removeClient(c);
     }
 
+    /**
+     * This method hire instructor to the gym by using the "HireNewInstructor" class
+     * @param p
+     * @param payment
+     * @param sessions
+     * @return the new instructor
+     * @throws InstructorNotQualifiedException
+     */
     public Instructor hireInstructor(Person p, int payment, List<SessionType> sessions) throws InstructorNotQualifiedException {
         this.currentSecretary();
         return _hireNewInstructor.hireInstructor(p,payment,sessions);
     }
 
+    /**
+     * This method adds session to the gym by using the "AddNewSession" class
+     * @param type
+     * @param dateAndHour
+     * @param forumType
+     * @param instructor
+     * @return the new session
+     * @throws InstructorNotQualifiedException
+     */
     public Session addSession (SessionType type, String dateAndHour, ForumType forumType, Instructor instructor) throws InstructorNotQualifiedException {
         this.currentSecretary();
         return _addNewSession.addSession(type,dateAndHour,forumType,instructor);
     }
 
+    /**
+     * This method registers client to session by using the "RegistrationToSession" class
+     * @param c1
+     * @param s1
+     * @throws DuplicateClientException
+     * @throws ClientNotRegisteredException
+     */
     public void registerClientToLesson(Client c1, Session s1) throws DuplicateClientException, ClientNotRegisteredException {
         this.currentSecretary();
         _registrationToSession.LegalRegister(c1,s1);
     }
 
+    /**
+     * This method pays salaries to employees by using the "PaySaleries" class
+     */
     public void paySalaries(){
         this.currentSecretary();
         _paySaleries.paySalaries();
@@ -93,6 +143,7 @@ public class Secretary extends Person {
         if(_gym.getSecretary()!=this) throw new NullPointerException("Error: Former secretaries are not permitted to perform actions");
     }
 
+    // ///////////// Getters & Setters /////////////////
 
     public int get_salary() {
         return _salary;

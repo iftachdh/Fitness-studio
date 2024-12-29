@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.List;
 /**
- * Class that exist to help the secretary in paySalaries method, (Singleton pattern).
+ * This Class exist to help the secretary in paySalaries method, (Singleton pattern).
  */
 
 public class PaySaleries {
@@ -30,7 +30,7 @@ public class PaySaleries {
      * To the secretary:
      *  check if she got paid that month, if not - pay her.
      * To the instructors:
-     *  pay by the sessions that didn't get paid already.
+     *  pay for the sessions that didn't get paid already.
      */
     protected void paySalaries(){
         LocalDate now = LocalDate.now();

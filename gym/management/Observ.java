@@ -1,7 +1,8 @@
 package gym.management;
 
 /**
- * Observer that we create.
+ * This class represents interface of Observer that we create.
+ * its has the update method
  */
 
 public interface Observ{

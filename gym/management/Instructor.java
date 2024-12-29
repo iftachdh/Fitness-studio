@@ -5,7 +5,8 @@ import gym.management.Sessions.SessionType;
 import java.util.List;
 
 /**
- * Instructor, implement person, have also paymentPerHour-int, and sessions-list of kind of session that he can teach.
+ * This class represents an Instructor, implement person,
+ * have also paymentPerHour-int, and sessions-list of session type that he can teach.
  */
 public class Instructor extends Person {
     private int _paymentPerHour;
@@ -46,6 +47,10 @@ public class Instructor extends Person {
         }
         return result.toString();
     }
+
+    // ///////////// Getters & Setters /////////////////
+
+
     public List<SessionType> get_sessions() {
         return _sessions;
     }

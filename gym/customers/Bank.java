@@ -1,6 +1,9 @@
 package gym.customers;
-
 import java.util.HashMap;
+
+/**
+ * This class represents one Bank that manage all the balance of the persons (id - accountBank)
+ */
 
 public class Bank {
 
@@ -9,14 +12,14 @@ public class Bank {
     private Bank(){
         this.accounts = new HashMap<>();
     }
-    public static Bank getInstance(){
+    protected static Bank getInstance(){
         if(instance==null){
             instance=new Bank();
         }
         return instance;
     }
 
-    public int GetBalance(int accountId) {
+    protected int GetBalance(int accountId) {
         if (accounts.containsKey(accountId)) {
             return accounts.get(accountId);
         } else {
@@ -24,7 +27,7 @@ public class Bank {
         }
     }
 
-    public void changeBalance(int accountId, int amount) {
+    protected void changeBalance(int accountId, int amount) {
         if (accounts.containsKey(accountId)) {
             accounts.put(accountId, amount);
         } else {
