@@ -5,6 +5,10 @@ import gym.customers.Person;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class represents the Gym class.
+ * All the information of the gym is save hear by secretary's actions
+ */
 
 public class Gym {
     private static Gym instance;
@@ -98,7 +102,7 @@ public class Gym {
     }
 
     /**
-     * Checks if the client is client of the gym
+     * Checks if the client is a client of the gym
      * @param c
      * @return
      */
@@ -107,6 +111,7 @@ public class Gym {
     }
 
 
+    // ///////////// Getters & Setters /////////////////
 
     protected void setGymBalance(int gymBalance) {
         this.gymBalance = gymBalance;
@@ -135,9 +140,11 @@ public class Gym {
     public String getName() {
         return name;
     }
+
     public void setName(String name){
         this.name=name;
     }
+
     protected List<Instructor> getInstructors() {
         return instructors;
     }
