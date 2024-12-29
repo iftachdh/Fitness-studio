@@ -103,7 +103,7 @@ and proper encapsulation of responsibilities.
 
 | **Design Pattern** | **Usage in Classes/Components**                                                                                     |
 | --- |---------------------------------------------------------------------------------------------------------------------|
-| **Singleton** | `Gym`, `Bank`, `RegistrationToGym`, `RegistrationToSession`                                                         |
+| **Singleton** | `Gym`, `Bank`, `RegistrationToGym`, `RegistrationToSession`, `HireNewInstructor`, `PaySaleries`, `AddNewSession`, `SessionFactory`   |
 | **Factory** | `SessionFactory`                                                                                                    |
 | **Observer** | `Gym`, `Secretary` (publisher), `Client`, `Instructor`, `GymLogger` (subscribers)                                   |
 | **Facade** | `Secretary`                                                                                                         |
