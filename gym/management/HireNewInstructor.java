@@ -49,7 +49,7 @@ public class HireNewInstructor {
             _gym.notifyHistory("Hired new instructor: "+instructor.getName()+" with salary per hour: "+instructor.get_paymentPerHour());
             return instructor;
         }
-        else throw new InstructorNotQualifiedException("The instructor already hired");
+        else throw new InstructorNotQualifiedException("Error: The instructor already hired");
     }
 
 
