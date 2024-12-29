@@ -111,20 +111,40 @@ public class Secretary extends Person {
         _paySaleries.paySalaries();
     }
 
+    /**
+     * This method print the history of the gym, uses the GymLogger of the gym 'history'
+     */
     public void printActions(){
         this.currentSecretary();
         _gym.getHistory().Print();
     }
+
+    /**
+     * This method send message to all the client that register to a specific session
+     * @param session
+     * @param msg
+     */
     public void notify(Session session, String msg){
         this.currentSecretary();
         session.notifyClients(msg);
         _gym.notifyHistory("A message was sent to everyone registered for session "+session.get_type()+" on "+session.get_dateAndHour()+" : "+msg);
     }
+
+    /**
+     * This method send message to all the client that register to the gym
+     * @param msg
+     */
     public void notify(String msg){
         this.currentSecretary();
         _gym.notifyClients(msg);
         _gym.notifyHistory("A message was sent to all gym clients: "+msg);
     }
+
+    /**
+     * This method send message to all the client that register to session in a specific day
+     * @param day
+     * @param msg
+     */
     public void notify(String day, String msg){
         this.currentSecretary();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -135,10 +155,22 @@ public class Secretary extends Person {
         }
         _gym.notifyHistory("A message was sent to everyone registered for a session on "+theDay+" : "+msg);
     }
+
+    /**
+     * This method send message to all the client that register to a specific session, but not update the history
+     * exist to help notify to all the sessions in specific day, so is private
+     * @param session
+     * @param msg
+     */
     private void notifyByDay(Session session, String msg){
         this.currentSecretary();
         session.notifyClients(msg);
     }
+
+    /**
+     * This method check if this secretary is the current secretary of the gym
+     * we use this method in the start of all the other method in this class (methods that are related to the gym)
+     */
     private void currentSecretary(){
         if(_gym.getSecretary()!=this) throw new NullPointerException("Error: Former secretaries are not permitted to perform actions");
     }

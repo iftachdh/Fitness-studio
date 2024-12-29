@@ -6,6 +6,11 @@ import gym.management.Sessions.SessionType;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * This class is an abstract class of session
+ * she is the only one that can do actions and changes in the gym
+ */
+
 public abstract class Session {
     protected SessionType _type;
     protected LocalDateTime _dateAndHour;
@@ -16,6 +21,14 @@ public abstract class Session {
     protected int _NumOfRegisters=0;
     protected int _price;
     protected boolean _payedToInstructor;
+
+    /**
+     * Protected constructor, construct all the things that in common to al the sessions type
+     * @param type
+     * @param dateAndHour
+     * @param forumType
+     * @param instructor
+     */
 
     protected Session(SessionType type, String dateAndHour, ForumType forumType, Instructor instructor){
         this._type = type;
@@ -32,15 +45,27 @@ public abstract class Session {
         return ("Session Type: "+_type+" | Date: "+_dateAndHourString+" | Forum: "+_forumType+" | Instructor: "+_instructor.getName()+" | Participants: "+_NumOfRegisters+"/"+_registers.length);
     }
 
+    /**
+     * This method send a message to all the clients that registered to the session
+     * @param msg
+     */
+
     protected void notifyClients(String msg) {
         for (Client client : _registers) {
             if(client!=null) client.update(msg);
         }
     }
+
+    /**
+     * This method add a new client to the session
+     * @param client
+     */
     protected void addClient(Client client){
         _registers[_NumOfRegisters]=client;
         _NumOfRegisters++;
     }
+
+    // ///////////// Getters & Setters /////////////////
 
     public SessionType get_type() {
         return _type;
