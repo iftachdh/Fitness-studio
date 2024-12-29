@@ -12,7 +12,7 @@ public class GymLogger implements Observ {
     /**
      * Constructor of the GymLogger
      */
-    public GymLogger(){
+    protected GymLogger(){
         this.history = new ArrayList<>();
     }
 

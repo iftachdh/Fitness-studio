@@ -3,6 +3,7 @@ package gym.management;
 import gym.customers.Client;
 import gym.customers.Person;
 import gym.Exception.*;
+import gym.management.Sessions.ForumType;
 import gym.management.Sessions.SessionType;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -20,7 +21,7 @@ public class Secretary extends Person {
     private static final PaySaleries _paySaleries = PaySaleries.getInstance();
 
 
-    public Secretary(Person p, int salary){
+    protected Secretary(Person p, int salary){
         super(p.getName(), p.getBalance(),p.getGender(), p.getDateOfBirthString(),p.getId());
         this._salary = salary;
     }
@@ -84,11 +85,11 @@ public class Secretary extends Person {
         }
         _gym.notifyHistory("A message was sent to everyone registered for a session on "+theDay+" : "+msg);
     }
-    public void notifyByDay(Session session, String msg){
+    private void notifyByDay(Session session, String msg){
         this.currentSecretary();
         session.notifyClients(msg);
     }
-    public void currentSecretary(){
+    private void currentSecretary(){
         if(_gym.getSecretary()!=this) throw new NullPointerException("Error: Former secretaries are not permitted to perform actions");
     }
 

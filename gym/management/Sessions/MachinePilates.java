@@ -1,7 +1,6 @@
 package gym.management.Sessions;
 
 import gym.customers.Client;
-import gym.management.ForumType;
 import gym.management.Instructor;
 import gym.management.Session;
 

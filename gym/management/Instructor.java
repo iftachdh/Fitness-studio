@@ -50,15 +50,15 @@ public class Instructor extends Person {
         return _sessions;
     }
 
-    public int get_paymentPerHour() {
+    protected int get_paymentPerHour() {
         return _paymentPerHour;
     }
 
-    public void set_paymentPerHour(int _paymentPerHour) {
+    protected void set_paymentPerHour(int _paymentPerHour) {
         this._paymentPerHour = _paymentPerHour;
     }
 
-    public void set_sessions(List<SessionType> _sessions) {
+    protected void set_sessions(List<SessionType> _sessions) {
         this._sessions = _sessions;
     }
 

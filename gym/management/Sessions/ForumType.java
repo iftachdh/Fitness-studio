@@ -1,4 +1,4 @@
-package gym.management;
+package gym.management.Sessions;
 
 /**
  * Enum method - the type of people that can enter a class

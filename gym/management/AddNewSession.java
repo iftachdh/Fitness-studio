@@ -1,6 +1,7 @@
 package gym.management;
 
 import gym.Exception.InstructorNotQualifiedException;
+import gym.management.Sessions.ForumType;
 import gym.management.Sessions.SessionType;
 import gym.management.Sessions.SessionsFactory;
 

@@ -107,27 +107,27 @@ public class Gym {
     }
 
 
-    public void setGymBalance(int gymBalance) {
+    protected void setGymBalance(int gymBalance) {
         this.gymBalance = gymBalance;
     }
 
-    public int getGymBalance() {
+    protected int getGymBalance() {
         return gymBalance;
     }
 
-    public List<Session> getSessions() {
+    protected List<Session> getSessions() {
         return sessions;
     }
 
-    public GymLogger getHistory() {
+    protected GymLogger getHistory() {
         return history;
     }
 
-    public void setHistory(GymLogger history) {
+    protected void setHistory(GymLogger history) {
         this.history = history;
     }
 
-    public static void setInstance(Gym instance) {
+    protected static void setInstance(Gym instance) {
         Gym.instance = instance;
     }
 
@@ -137,28 +137,23 @@ public class Gym {
     public void setName(String name){
         this.name=name;
     }
-
-    public void setSecretary(Secretary secretary) {
-        this.secretary = secretary;
-    }
-
-    public List<Instructor> getInstructors() {
+    protected List<Instructor> getInstructors() {
         return instructors;
     }
 
-    public void setInstructors(List<Instructor> instructors) {
+    protected void setInstructors(List<Instructor> instructors) {
         this.instructors = instructors;
     }
 
-    public List<Client> getClients() {
+    protected List<Client> getClients() {
         return clients;
     }
 
-    public void setClients(List<Client> clients) {
+    protected void setClients(List<Client> clients) {
         this.clients = clients;
     }
 
-    public void setSessions(List<Session> sessions) {
+    protected void setSessions(List<Session> sessions) {
         this.sessions = sessions;
     }
 

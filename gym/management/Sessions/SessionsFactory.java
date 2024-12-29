@@ -1,7 +1,6 @@
 package gym.management.Sessions;
 
 import gym.Exception.*;
-import gym.management.ForumType;
 import gym.management.Instructor;
 import gym.management.Session;
 

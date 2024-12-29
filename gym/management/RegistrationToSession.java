@@ -4,6 +4,8 @@ import gym.Exception.ClientNotRegisteredException;
 import gym.Exception.DuplicateClientException;
 import gym.customers.Client;
 import gym.customers.Gender;
+import gym.management.Sessions.ForumType;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
